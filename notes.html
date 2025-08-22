@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MunnaNotesHub - Notes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+/* Backgrounds */
+body.bg1 {
+  background: linear-gradient(to right, #0f172a, #1e293b);
+}
+body.bg2 {
+  background: linear-gradient(to right, #0f766e, #2563eb);
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Cards */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+}
+
+/* Nav Styling */
+nav a {
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+nav a:hover {
+  color: #ffcc70;
+  transform: translateY(-3px);
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: right;
+}
+nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Fonts */
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  color: #f1f5f9;
+}
+
+/* Toggle Button */
+#toggleBtn {
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+  transition: all 0.3s ease;
+}
+#toggleBtn:hover {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  transform: scale(1.05);
+}
+
+/* WhatsApp Floating */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+.whatsapp-float:hover {
+  background-color: #20b857;
+  transform: scale(1.1);
+}
+  </style>
+</head>
+<body class="bg1">
+
+  <!-- Header -->
+  <header class="glass fixed w-full top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <!-- Logo -->
+      <h1 class="text-2xl font-bold flex items-center gap-2 text-indigo-300">
+        📘 MunnaNotesHub
+      </h1>
+
+      <!-- Nav -->
+      <nav class="hidden md:flex gap-6 text-lg">
+        <a href="index.html">Home</a>
+        <a href="notes.html">Notes</a>
+        <a href="videos.html">Videos</a>
+        <a href="tools.html">Tools</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <!-- Toggle Background -->
+      <button id="toggleBtn" class="px-3 py-1 rounded-lg text-white">🎨</button>
+    </div>
+  </header>
+
+  <!-- Sections -->
+  <main class="pt-28">
+    <section class="section container mx-auto p-6" id="engineeringSection">
+      <h2 class="text-3xl font-bold text-center mb-8 text-indigo-300">⚙️ Engineering Notes</h2>
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="engineeringNotes"></div>
+    </section>
+
+    <section class="section container mx-auto p-6" id="medicalSection">
+      <h2 class="text-3xl font-bold text-center mb-8 text-indigo-300">🩺 Medical Notes</h2>
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="medicalNotes"></div>
+    </section>
+
+    <section class="section container mx-auto p-6" id="commerceSection">
+      <h2 class="text-3xl font-bold text-center mb-8 text-indigo-300">💰 Commerce Notes</h2>
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="commerceNotes"></div>
+    </section>
+
+    <section class="section container mx-auto p-6" id="baSection">
+      <h2 class="text-3xl font-bold text-center mb-8 text-indigo-300">📚 BA Notes</h2>
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="baNotes"></div>
+    </section>
+
+    <section class="section container mx-auto p-6" id="diplomaSection">
+      <h2 class="text-3xl font-bold text-center mb-8 text-indigo-300">📖 Diploma Notes</h2>
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="diplomaNotes"></div>
+    </section>
+
+    <section class="section container mx-auto p-6" id="itiSection">
+      <h2 class="text-3xl font-bold text-center mb-8 text-indigo-300">🔧 ITI Notes</h2>
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="itiNotes"></div>
+    </section>
+  </main>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/919606365902" target="_blank" class="whatsapp-float">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.85 11.85 0 0012 0C5.37 0 0 5.37 0 12c0 2.12.55 4.19 1.6 6.01L0 24l6.19-1.62A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 21.82c-1.85 0-3.65-.5-5.23-1.44l-.38-.23-3.68.97.98-3.58-.25-.37A9.82 9.82 0 012.18 12c0-5.41 4.41-9.82 9.82-9.82 2.63 0 5.1 1.02 6.95 2.87a9.78 9.78 0 012.87 6.95c0 5.41-4.41 9.82-9.82 9.82zm5.36-7.38c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.15-.64.14-.19.29-.74.93-.9 1.12-.16.19-.33.22-.62.07-.29-.15-1.24-.46-2.36-1.48-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.55-.88-2.12-.23-.56-.47-.49-.64-.5h-.55c-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43s1.03 2.82 1.18 3.01c.15.19 2.03 3.09 4.93 4.33.69.3 1.23.48 1.65.62.69.22 1.32.19 1.82.12.56-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34z"/>
+    </svg>
+  </a>
+
+<script>
+  // ✅ Notes Data (10 books per category)
+ const manualNotes = { 
+  'Engineering': [
+    { 
+	title: "Engineering Math", 
+      	details: "Complete Mathematics notes for Engineering students.", 
+      	Language: "English", 
+      	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755876978/shopping_qfdci5.webp", 
+      	fileUrl: "https://drive.google.com/file/d/1JjX-z92y3gfXRrNbcwT0hEiE1hEJQVcb/view?usp=drive_link" },
+
+    { 
+	title: "Engineering Physics", 
+	details: "Physics concepts with solved examples.", 
+	language: "Hindi", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755867857/proxy_fd0cm9.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1zoYLL08P_5Ju0SZAuWYnH4KlxY540YIE/view?usp=drive_link" },
+
+    { 
+	title: "Engineering Chemistry", 
+	details: "Important chemical reactions and formulas.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755868354/download_sncxj0.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1M0xEuo-nQSFBucNMb7u1zd8UWEl-xpBS/view?usp=sharing" },
+
+
+    { 
+	title: "Engineering Mechanics", 
+	details: "Mechanics notes with diagrams and examples.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755888705/proxy_c3hf65.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1ezkaNJWwrlb1hl7a-MsnXYlc-BdOG-Zh/view?usp=sharing" },
+
+    { 
+	title: "Engineering Graphics", 
+	details: "Drawing & design concepts.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755868417/download_puimcd.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1HSs8TbED1rw1Dq3UM3ZhIuqGhj5Wzc4h/view?usp=sharing" },
+
+    { 
+	title: "Control Systems", 
+	details: "Automation & control system notes.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755868549/download_xwlcm6.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1MIWFYF4RC6z79jnP7iDXIH20z2sKihFM/view?usp=sharing" },
+
+    { 
+	title: "Digital Electronics", 
+	details: "Logic gates & circuits.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755868600/images_ndxhda.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1PnRzB-E_YlUxlVT-DESD0byKEok3QxIJ/view?usp=sharing" },
+
+    { 
+	title: "Signal & Systems", 
+	details: "Signals, transforms & applications.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755882970/shopping_ssarun.webp", 
+	fileUrl: "https://drive.google.com/file/d/1U-EI2CfV7MglHaFxZfl8acF-gLh0GIBX/view?usp=sharing" },
+
+    { 
+	title: "Thermodynamics", 
+	details: "Heat, work & energy concepts.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755868679/download_jb8mhv.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1oNpRjEjmE6iEWH950GMulgyJk4MH4_6M/view?usp=drive_link" },
+
+    { 
+	title: "Fluid Mechanics", 
+	details: "Fluid flow & hydraulics.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755868761/images_w9o8rk.jpg", 
+	fileUrl: "https://drive.google.com/file/d/10xaKOSEBSL7gm1PfOm8a8X7cUn3xCL_9/view?usp=drive_link" }
+  ],
+
+
+  'Medical': [
+    { 
+	title: "Anatomy", 
+	details: "Complete anatomy notes with diagrams.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755868854/proxy_ghui0z.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1TMb_PFJXR_bWCeoEuk_EKAGIIz-mJSTU/view?usp=sharing" },
+
+    { 
+	title: "Physiology", 
+	details: "Detailed physiology topics.", 
+	language: "Hindi", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755868905/images_tc3lsd.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1p8gsNFrV_PddM2CyPJt8ZMUr0EstVJ3r/view?usp=sharing" },
+
+    {
+	 title: "Biochemistry", 
+	details: "Enzymes, DNA, and proteins explained.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755868956/download_firlxh.jpg",
+	 fileUrl: "https://drive.google.com/file/d/17TaIGWZsgeQcsbn1lhOONuqV6KRYLyBy/view?usp=drive_link" },
+
+    { 
+	title: "Pharmacology", 
+	details: "Drugs and their uses.",
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755869011/images_xpkstl.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1Q1NCmDBaRw6Km_XagMth_exCv2rcHSGV/view?usp=sharing" },
+    { 
+	title: "Pathology", 
+	details: "Diseases & their mechanisms.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755869152/images_amylxs.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1nNM9yEqKt9ngFDdmLsayuXu52BsldUCO/view?usp=drive_link" },
+    { 
+	title: "Microbiology", 
+	details: "Bacteria, virus & parasites.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755869222/images_a4avw1.png", 
+	fileUrl: "https://drive.google.com/file/d/1lmiT5ERw8Rq0_vXnorwU9jMKNyiNJP5q/view?usp=drive_link" },
+	
+    { 
+	title: "Forensic Medicine", 
+	details: "Medical laws & ethics.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755869400/shopping_jwtxsd.webp", 
+	fileUrl: "https://drive.google.com/file/d/1-PREqquCWifxBefp5RypOYjY3s0dkylK/view?usp=drive_link" },
+
+    { 
+	title: "Surgery Basics", 
+	details: "Fundamentals of surgery.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755869440/shopping_huxj5p.webp", 
+	fileUrl: "https://drive.google.com/file/d/1nNM9yEqKt9ngFDdmLsayuXu52BsldUCO/view?usp=drive_link" },
+
+    { 
+	title: "ENT", 
+	details: "Ear, Nose, Throat notes.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755886496/shopping_horlrt.webp", 
+	fileUrl: "https://drive.google.com/file/d/1ci4ThHg2GqlVoob3CKhckAu7O-ZnPC3-/view?usp=sharing" },
+    {
+	 title: "Ophthalmology", 
+	details: "Eye related topics.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755869996/download_y3vxvc.jpg", 
+	fileUrl: "notes/med-ophtha.pdf" }
+  ],
+
+  'Commerce': [
+
+    { 
+	title: "Accountancy", 
+	details: "Basics of accounting with solved problems.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870040/shopping_op1ltu.webp", 
+	fileUrl: "https://drive.google.com/file/d/1UfOPAIK7zpKhyEDObc9_pPbsmyKwd7gL/view?usp=drive_link"
+    },
+    { 
+	title: "Business Studies", 
+	details: "Complete business management notes.", 
+	language: "Hindi", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870074/shopping_vbccvy.webp", 
+	fileUrl: "https://drive.google.com/file/d/17xYJeDlt0eKqxEAGc9JYGAwwAykunacH/view?usp=drive_link" 
+    },
+    { 
+	title: "Economics", 
+	details: "Micro and Macro Economics explained.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870140/shopping_cpdl6k.webp", 
+	fileUrl: "https://drive.google.com/file/d/1Kr6g6zu17bV3HTta-23vY466m2PqFUW6/view?usp=sharing" 
+    },
+    { 
+	title: "Taxation", 
+	details: "All about GST and Income Tax.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870175/shopping_f2bv2m.webp", 
+	fileUrl: "https://drive.google.com/file/d/1oNpRjEjmE6iEWH950GMulgyJk4MH4_6M/view?usp=sharing"
+    },
+    {
+	title: "Banking", 
+	details: "Banking principles & services.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870311/shopping_rs0esa.webp", 	
+	fileUrl: "https://drive.google.com/file/d/13y79ojvuA7YhCZrCa2I-9VO3-gOveYWv/view?usp=sharing" 
+    },
+    { 
+	title: "Auditing", 
+	details: "Principles of auditing.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870396/shopping_dt9uw4.webp", 
+	fileUrl: "https://drive.google.com/file/d/1fMIOFv5sJ3KPfVgn8ge8aEyNklZAQ8TE/view?usp=drive_link" 
+    },
+    { 
+	title: "Marketing", 
+	details: "Concepts of sales & marketing.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870450/shopping_slrddg.webp", 
+	fileUrl: "https://drive.google.com/file/d/16iRqo_dX23Y7oQqf6TfFZ5eAHFslCRpw/view?usp=drive_link" 
+    },
+    { 
+	title: "Business Law", 
+	details: "Corporate & commercial law.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870474/shopping_wwdsyy.webp", 
+	fileUrl: "https://drive.google.com/file/d/1O8KwQflee-wZ4U20jFn0Jbmsg5_Un3Mz/view?usp=drive_link" 
+    },
+    { 
+	title: "HR Management", 
+	details: "Human resource principles.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870505/shopping_attdnz.webp", 
+	fileUrl: "https://drive.google.com/file/d/1VsasHVTDxRDVo6MFChdh0o3yglBMJUi_/view?usp=sharing"
+    },
+    { 
+	title: "International Trade", 
+	details: "Global trade basics.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870559/shopping_ilrppo.webp", 
+	fileUrl: "https://drive.google.com/file/d/1pvRUbjI8Cn5m6JKsYaYnUX4-U1vcR-v6/view?usp=drive_link" 
+    }],
+
+  'BA': [
+    { 
+	title: "History", 
+	details: "Detailed world history notes.", 
+	language: "Hindi", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870619/shopping_sxggmm.webp", 
+	fileUrl: "https://drive.google.com/file/d/1FfcGQDdW7O11QOLyQIpLzTW1PrxIh0RI/view?usp=sharing" 
+    },
+    { 
+	title: "Political Science", 
+	details: "Indian & world politics explained.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870652/shopping_ykndif.webp", 
+	fileUrl: "https://drive.google.com/file/d/1QGOILcVh9g4uzGBw348k5z5EeCSV8um0/view?usp=drive_link" 
+    },
+    { 
+	title: "Sociology", 
+	details: "Important sociology concepts.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870703/shopping_b9yjiw.webp", 
+	fileUrl: "https://drive.google.com/file/d/1Fhx7dARfG59hN6YzL39F-bMiSttS4Kb6/view?usp=sharing" 
+    },
+    { 
+	title: "English Literature", 
+	details: "Poetry, drama and novels covered.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870766/shopping_eal1bx.webp", 
+	fileUrl: "https://drive.google.com/file/d/12oclLXHfa0vCrTN9G8UuKiMg9TOouMRh/view?usp=sharing" 
+    },
+    { 
+	title: "Psychology", 
+	details: "Basics of human psychology.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870814/shopping_jaqlx7.webp", 
+	fileUrl: "https://drive.google.com/file/d/1fYKVRzr8KinLcvOxk1UwvCr_Pbzeecn6/view?usp=drive_link" 
+    },
+    { 
+	title: "Philosophy", 
+	details: "Major philosophies explained.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870867/shopping_apzldo.webp", 
+	fileUrl: "https://drive.google.com/file/d/1JAIsZXgOooAp87MDY424ZdQKBIllBOhn/view?usp=sharing" 
+    },
+    { 
+	title: "Geography", 
+	details: "Physical & human geography.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870937/shopping_gbwvug.webp", 
+	fileUrl: "https://drive.google.com/file/d/1CnA9bJAa7rHkFI8dC0R6tJof32bY1muw/view?usp=sharing" 
+    },
+    { 
+	title: "Public Administration", 
+	details: "Govt. & policies.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755870997/shopping_xnapd5.webp", 
+	fileUrl: "https://drive.google.com/file/d/1l9U6aizdNY-Q-6wtdqucWEkSRrqGPY5C/view?usp=sharing" 
+    },
+    { 
+	title: "Economics BA", 
+	details: "Economics for BA students.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755888147/proxy_mkykfp.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1ezkaNJWwrlb1hl7a-MsnXYlc-BdOG-Zh/view?usp=sharing" 
+    },
+    { 
+	title: "Journalism", 
+	details: "Media & journalism basics.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755871063/shopping_ymophz.webp", 
+	fileUrl: "https://drive.google.com/file/d/1gxBrx61NVkmn-BwJwMSc-ZgtBxBcHkAV/view?usp=sharing" 
+    }],
+
+  'Diploma': [
+    { 
+	title: "Electrical Engg", 
+	details: "Electrical concepts and circuits.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755871113/shopping_zvgzis.webp", 
+	fileUrl: "https://drive.google.com/file/d/1hvIwGuhIRFS330Sev53ICjdLlE5zo9xq/view?usp=drive_link" 
+    },
+    { 
+	title: "Mechanical Engg", 
+	details: "Machines, drawings and thermodynamics.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755871159/shopping_dbzzkb.webp", 
+	fileUrl: "https://drive.google.com/file/d/12sLz0WYyU9mU3vv71zPzFUqdEB4-JTIT/view?usp=sharing" 
+    },
+    { 
+	title: "Civil Engg", 
+	details: "Construction & survey notes.", 
+	language: "Hindi", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755871213/shopping_gvfvgo.webp", 
+	fileUrl: "https://drive.google.com/file/d/12sLz0WYyU9mU3vv71zPzFUqdEB4-JTIT/view?usp=sharing" 
+    },
+    { 
+	title: "Computer Engg", 
+	details: "Programming and IT concepts.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755871244/shopping_d7ao4x.webp", 
+	fileUrl: "https://drive.google.com/file/d/1HSs8TbED1rw1Dq3UM3ZhIuqGhj5Wzc4h/view?usp=sharing" 
+    },
+    { 
+	title: "Electronics", 
+	details: "Analog & digital electronics.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755871357/shopping_veacgn.webp", 
+	fileUrl: "https://drive.google.com/file/d/1NWIcPyFGtXV32mAoHomhhHtYToQLFeEt/view?usp=sharing" 
+    },
+    { 
+	title: "Automobile Engg", 
+	details: "Vehicle mechanics & design.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755871402/shopping_rx56bf.webp", 
+	fileUrl: "https://drive.google.com/file/d/1NXEulbwOCRiB7157a46Ka71i62-8NHUU/view?usp=sharing" 
+    },
+    { 
+	title: "Architecture", 
+	details: "Basics of architecture design.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755871630/shopping_rotyga.webp", 
+	fileUrl: "https://drive.google.com/file/d/1i8hvfos3VpoU5C_p3ZCbbZWhTDrIpGA5/view?usp=sharing" 
+    },
+    { 
+	title: "Mining Engg", 
+	details: "Mining methods & safety.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755888694/proxy_va4tqf.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1ezkaNJWwrlb1hl7a-MsnXYlc-BdOG-Zh/view?usp=sharing" 
+    },
+    { 
+	title: "Textile Engg", 
+	details: "Fabric & textile notes.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755888740/proxy_wzxr7q.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1ezkaNJWwrlb1hl7a-MsnXYlc-BdOG-Zh/view?usp=sharing" 
+    },
+    { 
+	title: "Chemical Engg", 
+	details: "Chemicals & industries.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755888724/proxy_cov6yd.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1ezkaNJWwrlb1hl7a-MsnXYlc-BdOG-Zh/view?usp=sharing" 
+    }],
+  'ITI': [
+    { 
+	title: "Fitter Trade", 
+	details: "Workshop practice notes.", 
+	language: "Hindi", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755872008/shopping_gxmal4.webp", 
+	fileUrl: "https://drive.google.com/file/d/1PnXFnXDA99G-xn59_4Z7ykToD1yxQ0MI/view?usp=drive_link" 
+    },
+    { 
+	title: "Electrician Trade", 
+	details: "Wiring and electrical systems.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755889683/proxy_t3prcg.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1ezkaNJWwrlb1hl7a-MsnXYlc-BdOG-Zh/view?usp=sharing" 
+    },
+    { 
+	title: "Welder Trade", 
+	details: "Welding techniques and safety.", 
+	language: "Hindi", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755889765/proxy_iinitq.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1tMQN0D-v-QZddphPvus2GaavucM8ryTz/view?usp=sharing" 
+    },
+    { 
+	title: "COPA Trade", 
+	details: "Computer basics for ITI.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755889847/proxy_dan3fd.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1ezkaNJWwrlb1hl7a-MsnXYlc-BdOG-Zh/view?usp=sharing" 
+    },
+    { 
+	title: "Turner Trade", 	
+	details: "Turning machine notes.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755873121/810yGTamIUL._AC_UY327_FMwebp_QL65__vcsixo.webp", 
+	fileUrl: "https://drive.google.com/file/d/1ezkaNJWwrlb1hl7a-MsnXYlc-BdOG-Zh/view?usp=sharing" 
+},
+    { 	
+	title: "Plumber Trade", 
+	details: "Plumbing basics.", 
+	language: "Hindi", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755872890/proxy_lutzwj.jpg",
+	fileUrl: "https://drive.google.com/file/d/1ezkaNJWwrlb1hl7a-MsnXYlc-BdOG-Zh/view?usp=sharing" 
+	},
+    { 
+	title: "Carpenter Trade",
+	details: "Wood work & tools.", 
+	language: "Hindi", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755890114/proxy_ae08by.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1KkAIgElgfvdl8N_dGVeIwIBzHlslNBjP/view?usp=sharing" 
+	},
+    { 
+	title: "Painter Trade", 
+	details: "Painting & coating basics.", 	
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755890251/proxy_nbdddo.jpg", 
+	fileUrl: "https://drive.google.com/file/d/14eOSVv4fLViso7hWaDlGK80rZbRD-sNm/view?usp=sharing" 
+	},
+    { 
+	title: "Mechanic Diesel", 
+	details: "Diesel engine concepts.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755890347/proxy_elr1bn.jpg", 
+	fileUrl: "https://drive.google.com/file/d/1Uu8sq4tGnYB2nwyFX2UivGHqZBSXi_MR/view?usp=sharing" 
+	},
+    { 
+	title: "Tafe Motor Mechanic Training Course For Girls", 
+	details: "Motor vehicle repair.", 
+	language: "English", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755872540/shopping_nhhnor.webp", 
+	fileUrl: "https://drive.google.com/file/d/1ezkaNJWwrlb1hl7a-MsnXYlc-BdOG-Zh/view?usp=sharing"
+ }
+  ]
+};
+
+  // ✅ Categories
+  const categories = {
+    'Engineering': document.getElementById('engineeringNotes'),
+    'Medical': document.getElementById('medicalNotes'),
+    'Commerce': document.getElementById('commerceNotes'),
+    'BA': document.getElementById('baNotes'),
+    'Diploma': document.getElementById('diplomaNotes'),
+    'ITI': document.getElementById('itiNotes')
+  };
+
+  // ✅ Function: Convert Google Drive link → Direct download link
+  function makeDirectDownload(url) {
+    if (url.includes("drive.google.com")) {
+      let match = url.match(/\/d\/(.*)\/view/);
+      if (match && match[1]) {
+        return `https://drive.google.com/uc?export=download&id=${match[1]}`;
+      }
+    }
+    return url; // agar already sahi hai
+  }
+
+  // ✅ Function to render notes with image + details + language
+  function renderNotes(category, notes) {
+    notes.forEach(n => {
+      const card = document.createElement("div");
+      card.className = "glass p-6 rounded-xl text-center card";
+      card.innerHTML = `
+        <img src="${n.image}" alt="${n.title}" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="font-bold text-xl mb-2 text-indigo-300">${n.title}</h3>
+        <p class="text-sm text-gray-300 mb-2">${n.details}</p>
+        <p class="text-xs text-pink-400 font-semibold mb-3">Language: ${n.language}</p>
+        <a href="${makeDirectDownload(n.fileUrl)}" download 
+           class="px-4 py-2 rounded-lg font-semibold text-white 
+                  bg-gradient-to-r from-pink-500 to-yellow-500 
+                  hover:from-yellow-500 hover:to-pink-500 
+                  transition-transform transform hover:scale-105 shadow-md">
+          ⬇️ Download
+        </a>
+      `;
+      categories[category].appendChild(card);
+    });
+  }
+
+  // ✅ Render all categories (10 books each)
+  for (const cat in manualNotes) {
+    renderNotes(cat, manualNotes[cat]);
+  }
+
+  // ✅ Toggle background on button click
+  document.getElementById("toggleBtn").addEventListener("click", () => {
+    document.body.classList.toggle("bg1");
+    document.body.classList.toggle("bg2");
+  });
+
+
+ function downloadFile(fileUrl) {
+    alert("Please wait, your download is starting... it may take a few seconds. Sorry for the delay ❤️");
+    window.location.href = fileUrl;
+}
+
+</script>
+</body>
+</html>

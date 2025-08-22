@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MunnaNotesHub - Videos</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  
+    <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
+ <style>
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Nav underline hover */
+  .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+}
+
+/* ===== Nav Hover + Underline ===== */
+nav a {
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+nav a:hover {
+  color: #ffcc70;
+  transform: translateY(-3px);
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: right;
+}
+nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ===== Fonts / Base Colors ===== */
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  color: #f1f5f9;
+}
+
+/* ===== Toggle Button ===== */
+#toggleBtn {
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+  transition: all 0.3s ease;
+}
+#toggleBtn:hover {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  transform: scale(1.05);
+}
+
+
+    /* ===== Backgrounds (🎨 toggle) ===== */
+body.bg1 {
+  background: linear-gradient(to right, #0f172a, #1e293b);
+}
+body.bg2 {
+  background: linear-gradient(to right, #0f766e, #2563eb);
+}
+
+    /* Glass header */
+    .glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+  </style>
+</head>
+<body class="bg1 text-gray-800 transition-colors duration-500">
+
+  <!-- Header -->
+  <header class="glass fixed w-full top-0 left-0 z-50">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <!-- Logo -->
+      <h1 class="text-2xl font-bold flex items-center gap-2 text-indigo-300">
+        📘 MunnaNotesHub
+      </h1>
+
+      <!-- Nav -->
+      <nav class="flex gap-6 text-white font-semibold">
+        <a href="index.html">Home</a>
+        <a href="notes.html">Notes</a>
+        <a href="videos.html">Videos</a>
+        <a href="tools.html">Tools</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <!-- Toggle Bg -->
+      <button id="toggleBg" class="px-3 py-1 rounded-lg text-white font-semibold 
+              bg-gradient-to-r from-pink-500 to-yellow-500 
+              hover:from-yellow-500 hover:to-pink-500 transition">
+        🎨
+      </button>
+    </div>
+  </header>
+
+  <!-- Tools Section -->
+  <section class="pt-28 container mx-auto p-6" id="toolsSection">
+    <h2 class="text-3xl font-bold text-center mb-8 text-white">🛠 AI Tools</h2>
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="toolsGrid"></div>
+  </section>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/919606365902" target="_blank"
+     class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.85 11.85 0 0012 0C5.37 0 0 5.37 0 12c0 2.12.55 4.19 1.6 6.01L0 24l6.19-1.62A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 21.82c-1.85 0-3.65-.5-5.23-1.44l-.38-.23-3.68.97.98-3.58-.25-.37A9.82 9.82 0 012.18 12c0-5.41 4.41-9.82 9.82-9.82 2.63 0 5.1 1.02 6.95 2.87a9.78 9.78 0 012.87 6.95c0 5.41-4.41 9.82-9.82 9.82zm5.36-7.38c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.15-.64.14-.19.29-.74.93-.9 1.12-.16.19-.33.22-.62.07-.29-.15-1.24-.46-2.36-1.48-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.55-.88-2.12-.23-.56-.47-.49-.64-.5h-.55c-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43s1.03 2.82 1.18 3.01c.15.19 2.03 3.09 4.93 4.33.69.3 1.23.48 1.65.62.69.22 1.32.19 1.82.12.56-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34z"/>
+    </svg>
+  </a>
+
+<script>
+  // --- Manual Tools List (popular AI tools with images) ---
+  const manualTools = [
+    { 
+	name: "ChatGPT", 
+	description: "Versatile AI assistant by OpenAI", 
+	link: "https://chat.openai.com", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884092/download_avhb1k.jpg" },
+    {
+	name: "Claude", 
+	description: "Anthropic’s ethical reasoning LLM", 
+	link: "https://claude.ai", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884118/images_yzzylf.jpg" },
+    { 
+	name: "Google Gemini", 
+	description: "Google’s multimodal AI assistant", 
+	link: "https://gemini.google.com", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884142/download_fpxdpu.jpg" },
+    { 
+	name: "Midjourney", 
+	description: "AI image generator", 
+	link: "https://midjourney.com", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884162/download_cztjdr.jpg" },
+    { 
+	name: "Canva Magic Studio", 
+	description: "Design with AI", 
+	link: "https://canva.com", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884195/download_znnoom.jpg" },
+    { 
+	name: "Perplexity AI", 
+	description: "AI-powered search/chat assistant", 
+	link: "https://perplexity.ai", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884215/download_dtjdhl.png" },
+    { 
+	name: "ElevenLabs", 
+	description: "Lifelike AI voice generation", 
+	link: "https://elevenlabs.io", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884234/images_riwzn1.jpg" },
+    { 	
+	name: "Synthesia", 
+	description: "AI video generation", 
+	link: "https://synthesia.io", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884276/download_aqp3ir.jpg" },
+    { 
+	name: "Jasper AI", 
+	description: "AI copywriting assistant", 
+	link: "https://jasper.ai", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884288/download_nvq1ya.jpg" },
+    { 
+	name: "Grammarly", 
+	description: "AI writing assistant", 
+	link: "https://grammarly.com", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884320/download_tdoh8r.png" },
+{ 
+	name: "Notion AI", 
+	description: "Boost productivity with AI inside Notion", 
+	link: "https://notion.so", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884352/download_zlxe7o.png" },
+{ 
+	name: "Quillbot", 
+	description: "AI paraphrasing & grammar tool", 
+	link: "https://quillbot.com", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884365/download_sga0fr.png" },
+{ 
+	name: "Runway ML", 
+	description: "AI video & image editing", 
+	link: "https://runwayml.com", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884386/download_vi0llf.jpg" },
+{ 
+	name: "Descript", 
+	description: "AI podcast & video editing", 
+	link: "https://descript.com", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884427/download_tiscdr.png" },
+{ 
+	name: "Copy.ai", 
+	description: "AI for copywriting & marketing", 
+	link: "https://copy.ai", 
+	image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884442/download_tptjk4.png" }];
+
+  const grid = document.getElementById("toolsGrid");
+ function createToolCard(tool) {
+  const card = document.createElement("div");
+  card.className = "glass p-6 rounded-xl text-center card"; // ✅ glass + hover effect same as notes
+  card.innerHTML = `
+    <img src="${tool.image}" alt="${tool.name}" 
+         class="w-full h-40 object-contain rounded-lg mb-4 bg-white/10 p-2">
+    <h3 class="font-bold text-xl mb-2 text-indigo-300">${tool.name}</h3>
+    <p class="text-sm text-gray-300 mb-2">${tool.description}</p>
+    <a href="${tool.link}" target="_blank" 
+       class="px-4 py-2 rounded-lg font-semibold text-white 
+              bg-gradient-to-r from-pink-500 to-yellow-500 
+              hover:from-yellow-500 hover:to-pink-500 
+              transition-transform transform hover:scale-105 shadow-md">
+      🔗 Visit Tool
+    </a>
+  `;
+  return card;
+}
+
+  // Load manual tools
+  manualTools.forEach(tool => grid.appendChild(createToolCard(tool)));
+
+// --- Load tools from backend if available ---
+fetch("https://your-backend-url.onrender.com/api/tools")
+  .then(res => res.json())
+  .then(data => {
+    data.forEach(tool => grid.appendChild(createToolCard(tool)));
+  })
+  .catch(err => console.log("Backend tools not loaded:", err));
+
+
+  // Toggle bg
+  const toggleBtn = document.getElementById("toggleBg");
+  const body = document.body;
+  toggleBtn.addEventListener("click", () => {
+    if (body.classList.contains("bg1")) {
+      body.classList.remove("bg1");
+      body.classList.add("bg2");
+    } else {
+      body.classList.remove("bg2");
+      body.classList.add("bg1");
+    }
+  });
+</script>
+</body>
+</html>
