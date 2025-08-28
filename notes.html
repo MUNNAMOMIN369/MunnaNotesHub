@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MunnaNotesHub - Notes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    /* Backgrounds */
+    body.bg1 {
+      background: linear-gradient(to right, #0f172a, #1e293b);
+    }
+    body.bg2 {
+      background: linear-gradient(to right, #0f766e, #2563eb);
+    }
+    /* Glass Effect */
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    /* Cards */
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    }
+    /* Nav Styling */
+    nav a {
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffcc70;
+      transform: translateY(-3px);
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: right;
+    }
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    /* Fonts */
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+    }
+    /* Toggle Button */
+    #toggleBtn {
+      background: linear-gradient(135deg, #ff512f, #dd2476);
+      transition: all 0.3s ease;
+    }
+    #toggleBtn:hover {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      transform: scale(1.05);
+    }
+    /* WhatsApp Floating */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .whatsapp-float:hover {
+      background-color: #20b857;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body class="bg1">
+  <!-- Header -->
+  <header class="glass fixed w-full top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <!-- Logo -->
+      <h1 class="text-2xl font-bold flex items-center gap-2 text-indigo-300">
+        📘 MunnaNotesHub
+      </h1>
+      <!-- Nav -->
+      <nav class="hidden md:flex gap-6 text-lg">
+        <a href="index.html">Home</a>
+        <a href="notes.html">Notes</a>
+        <a href="videos.html">Videos</a>
+        <a href="tools.html">Tools</a>
+	
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </nav>
+      <!-- Toggle Background -->
+      <button id="toggleBtn" class="px-3 py-1 rounded-lg text-white">🎨</button>
+    </div>
+  </header>
+  <!-- Sections -->
+  <main class="pt-28">
+    <section class="section container mx-auto p-6" id="engineeringSection">
+      <h2 class="text-3xl font-bold text-center mb-8 text-indigo-300">⚙️ Engineering Notes</h2>
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="engineeringNotes"></div>
+    </section>
+    <section class="section container mx-auto p-6" id="medicalSection">
+      <h2 class="text-3xl font-bold text-center mb-8 text-indigo-300">🩺 Medical Notes</h2>
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="medicalNotes"></div>
+    </section>
+    <section class="section container mx-auto p-6" id="commerceSection">
+      <h2 class="text-3xl font-bold text-center mb-8 text-indigo-300">💰 Commerce Notes</h2>
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="commerceNotes"></div>
+    </section>
+   
+    
+  </main>
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/919606365902" target="_blank" class="whatsapp-float" aria-label="WhatsApp chat">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.85 11.85 0 0012 0C5.37 0 0 5.37 0 12c0 2.12.55 4.19 1.6 6.01L0 24l6.19-1.62A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 21.82c-1.85 0-3.65-.5-5.23-1.44l-.38-.23-3.68.97.98-3.58-.25-.37A9.82 9.82 0 012.18 12c0-5.41 4.41-9.82 9.82-9.82 2.63 0 5.1 1.02 6.95 2.87a9.78 9.78 0 012.87 6.95c0 5.41-4.41 9.82-9.82 9.82zm5.36-7.38c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.15-.64.14-.19.29-.74.93-.9 1.12-.16.19-.33.22-.62.07-.29-.15-1.24-.46-2.36-1.48-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.55-.88-2.12-.23-.56-.47-.49-.64-.5h-.55c-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43s1.03 2.82 1.18 3.01c.15.19 2.03 3.09 4.93 4.33.69.3 1.23.48 1.65.62.69.22 1.32.19 1.82.12.56-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34z"/>
+    </svg>
+  </a>
+<script>
+  // ✅ Notes Data (25 books for Programming inside Engineering category for demo)
+  const manualNotes = {
+    'Engineering': [
+      {
+        title: "C Programming Language",
+        details: "A classic guide to programming in C with foundational concepts and techniques.",
+        language: "English",
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336034/download_wsu0ot.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1rccpF19NPrcEVeQrlrFc31f35320I1xw/view?usp=drive_link"
+      },
+
+
+      {
+        title: "C++ Notes by Kurt Nørmark",
+        details: "Beginner-friendly introduction to C++ covering core object-oriented concepts.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336086/download_gxnqxi.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1k9XmvPWPRevOEjZs0ucw0tdZqmpboyn8/view?usp=drive_link"
+      },
+{
+        title: "C++ Programming",
+        details: "C++ Programming For Beginners.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337680/download_az9frl.png",
+
+        fileUrl: "https://drive.google.com/file/d/1pp6c7xsnC0HKaqjQQh0klOSg47NtqaWt/view?usp=drive_link"
+      },
+
+
+
+
+      {
+        title: "Object-Oriented Programming in C#",
+        details: "Comprehensive resource for understanding OOP principles in C#.",
+        language: "English",
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336095/download_s2xbba.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1OCQnVi6RiWtt9kc1W5y1t57o7PnS-yIX/view?usp=drive_link"
+      },
+
+
+      {
+        title: "php",
+        details: "Essential concepts and best practices for php programmer.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336668/download_cheqdp.png",
+
+        fileUrl: "https://drive.google.com/file/d/1DN8IY1yF7VYmeUanVnV1kWl_cptIlpBI/view?usp=drive_link"
+      },
+
+
+      {
+        title: "Introduction to Programming with Java",
+        details: "Step-by-step Java guide for beginners to understand programming basics.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336208/images_xqhtbw.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1ooVKsPgCd8UJAhHPIcZ4J_vPnsD8zMZV/view?usp=drive_link"
+      },
+
+
+{
+        title: "Java 3D Programming",
+        details: "java 3d programming handbook.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337007/download_qy0zja.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1mUQkwyxKzC06BN1-0-NtD0DK-tj3sRn8/view?usp=drive_link"
+      },
+
+
+
+{
+        title: "Data Structures in java ",
+        details: "Data structures in java handbook.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336941/download_b0fnzp.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1ZDrOp51wEMb2EYwR_TVImvedYCQ68Eps/view?usp=drive_link"
+      },
+
+
+
+   {
+        title: "Linux-Command",
+        details: "Linux Commands handbook.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336894/download_gffyu0.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1nEddO1fw3eCrrYdN_zjISICzdaAfsPcb/view?usp=drive_link"
+      },
+
+
+   {
+        title: "Learn Sass",
+        details: "Sass Practical Guide.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336822/download_vkqst3.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1Tqo125bM7bGfukRe2jzOW1jwvinzNE7V/view?usp=drive_link"
+      },
+
+
+
+
+    {
+        title: "Next-js-handbook",
+        details: "Node.js Hand Written Book.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336723/download_hyrj1x.png",
+
+        fileUrl: "https://drive.google.com/file/d/1ABirctsU_gM56AxG51DbvXonF9FXHDX_/view?usp=drive_link"
+      },
+
+
+      {
+        title: "Node-js handbook",
+        details: "Node-js Hand Written Book.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336740/download_esvkwe.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1p2X8sSUDEwVjHLYWmgUk9FwC_zGor2MO/view?usp=drive_link"
+      },
+
+      {
+        title: "JavaScript",
+        details: "JavaScript HandBook.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336996/download_rycqhk.png",
+
+        fileUrl: "https://drive.google.com/file/d/14pPHu4vrCMCIykyyoUow0XYaizVYjedk/view?usp=drive_link"
+      },
+
+
+
+      {
+        title: "A Byte of Python",
+        details: "An approachable book for beginners to learn Python programming fast.",
+        language: "English",
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337723/download_ksobhk.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1Y3MsUf9CAKBa-b1PAqY0azW3FKqINSW9/view?usp=drive_link"
+      },
+
+
+      {
+        title: "Laravel-Handbook",
+        details: "Larvel-Handbook.",
+        language: "English",
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336973/download_srxsam.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1m0lIq0i3p-EXP1bHfcpFAMWBURjLNWzk/view?usp=drive_link"
+      },
+
+
+
+      {
+        title: "HTMX",
+        details: "htmx full guide.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337014/download_xoii5q.png",
+
+        fileUrl: "https://drive.google.com/file/d/19mYu2XLuKCp67BjDqpO41PKXLQtHwuUO/view?usp=drive_link"
+      },
+
+
+      {
+        title: "Astro-HandBook",
+        details: "Astro-HandBook",
+        language: "English",
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337708/download_zwqxgk.jpg",
+
+
+        fileUrl: "https://drive.google.com/file/d/106CIWC_z9CWQ5pt3j0gvCbs_H5ATL8VG/view?usp=drive_link"
+      },
+
+
+      {
+        title: "Angular-2 (Beginner)",
+        details: "Angular-2 For Beginner.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337713/download_ohgpho.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1iXFt8IbhnlV6rYKGIETeTB2DhnFyN0fA/view?usp=drive_link"
+
+      },
+
+
+      {
+        title: "HTML5 Notes For Professionals",
+        details: "Curated resources for learning web development technologies and best practices.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337022/download_qjw15k.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/11NuRDwZi9RLMPwDziw4C1S1px_ap6sY-/view?usp=drive_link"
+      },
+
+
+   {
+        title: "HTML5",
+        details: "HTML5 Canvas Notes for Professionals.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337058/download_qavq0k.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1T38KYteidtE3qNKW1c2GqumuclD-RvVl/view?usp=drive_link"
+      },
+
+
+   {
+        title: "HTML",
+        details: "HTML Notes for Beginners.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337115/download_gi2ttb.png",
+
+        fileUrl: "https://drive.google.com/file/d/1FoaS7lFyYRWmfWKReYJb6cOluOI-s4JM/view?usp=drive_link"
+      },
+
+
+{
+        title: "CSS Notes For Professional",
+        details: "CSS Notes For Professional ",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756343538/download_itzarm.png",
+
+        fileUrl: "https://drive.google.com/file/d/1wco4OJwMmzEVLli1Vh_1ewrcx6EDHBpW/view?usp=drive_link"
+      },
+
+ {
+	title: "CSS Notes For Beginners",
+        details: "CSS Notes For Beginners",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756343606/download_fdmznu.png",
+
+        fileUrl: "https://drive.google.com/file/d/1KTXGUkSVJw51PqcnpSaZxjt-aKXgNh5W/view?usp=drive_link"
+      },
+
+
+      {
+        title: "GO-HandBook",
+        details: "GO-HandBook For Beginner.",
+        language: "English",
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337120/download_c1ajmv.png",
+        fileUrl: "https://drive.google.com/file/d/17OQf74pfQZ6x46-G2cetDIYqiv_2se6_/view?usp=drive_link"
+      },
+
+
+
+      {
+        title: "GIT Cheat Sheet Book",
+        details: "Git Cheat Sheet HandBook .",
+        language: "English",
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337110/images_vevksh.png",
+        fileUrl: "https://drive.google.com/file/d/1exawstOQNSTr03XWsbwrZPUlrEAHDqfe/view?usp=drive_link"
+      },
+
+
+      {
+        title: "Programming In Data Structure",
+        details: "Fundamental books to master In Data Structure.",
+        language: "English",
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337184/download_vl8yan.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1_LqvWuMTqT5rCEYk4jk0hMaD8nQ--vz5/view?usp=drive_link"
+      },
+
+
+      {
+        title: "Express-Js",
+        details: "Express-Js HandBook.",
+        language: "English",
+
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337213/download_hsoxsg.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1WycE_scsSVupzjqJ_ruV6DhOzZU-0ybx/view?usp=drive_link"
+      },
+
+{
+        title: "Django Documentation",
+        details: "Django Document for Software Foundation.",
+        language: "English",
+
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337218/download_pzwx6r.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1i20hAJW3VpC9YyGemV33VYymuUQI1smB/view?usp=drive_link"
+      },
+
+{
+        title: "Alpine-HandBook",
+        details: "Alpine-HandBook For Beginners.",
+        language: "English",
+
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337718/download_kdw6ec.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1rZ9Z6JPglscZDW1gO_v7fg8LMa54m5O_/view?usp=drive_link"
+      },
+
+      {
+        title: "Programming in Pascal",
+        details: "programming in Pascal Hand-Book.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336544/download_c9ofho.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1YOoGcBlL4LYhnkHDDcvZk2v94hTQUe3L/view?usp=drive_link"
+      },
+
+
+      {
+        title: "Python-handbook",
+        details: "Programming-Books.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336536/download_j2vfv3.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1-k2NiZv7c_9G4h6hw0bgB8ishAmBnf9o/view?usp=drive_link"
+      },
+
+
+      {
+        title: "Python-handbook",
+        details: "Basic programming in Python.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336491/download_sicloy.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1sJseP65JaEL4-nYH4Le3owsVO6YGe-MS/view?usp=drive_link"
+      },
+
+      {
+        title: "React-handbook(Free)",
+        details: "A collection of books on programming.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336528/images_uzcp7f.png",
+
+        fileUrl: "https://drive.google.com/file/d/1geO5IVj4vdBvbTKnv-SEgtcEqvL5Jzvv/view?usp=drive_link"
+      },
+
+      {
+        title: "Ruby",
+        details: "Free educational resources and courses in ruby.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336454/download_vks38y.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/1V64Ao-7vhQ05b-2fw_jU1DWIM4Wt24uD/view?usp=drive_link"
+      },
+
+
+    {
+        title: "DataStructure in java Books",
+        details: "In-depth books on algorithms for problem-solving and coding interviews.",
+        language: "English",
+
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337698/download_l6jawa.jpg",
+
+
+        fileUrl: "https://drive.google.com/file/d/1D7XijcpEcNKYUC0ppIrVQwpY9vOahELe/view?usp=drive_link"
+      },
+
+ {
+        title: "DataStructure in C++ Books",
+        details: "In-depth books on algorithms for problem-solving and coding interviews.",
+        language: "English",
+
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756337703/download_uzm4l2.jpg",
+
+
+        fileUrl: "https://drive.google.com/file/d/1nGxUBwZQ2qALPmFM7WnBbdR5LTu9SxmD/view?usp=drive_link"
+      },
+
+      {
+        title: "SAGEBOOK",
+        details: "Detailed guides Sage.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336366/images_aeut8f.jpg",
+        fileUrl: "https://drive.google.com/file/d/1MKCKdUQX-fTLNPJ6DvdwN0Or7xKf35Or/view?usp=drive_link"
+      },
+
+      {
+        title: "SQL",
+        details: "Complete Sql handbook.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336359/download_nljnqu.jpg",
+        fileUrl: "https://drive.google.com/file/d/1PYp7MifhlOhuXbRRjFwirWxOiayGpjj8/view?usp=drive_link"
+      },
+
+      {
+        title: "Swift-handbook",
+        details: "Free resources and books covering the field of artificial intelligence.",
+        language: "English",
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336317/download_a51zg3.jpg",
+        fileUrl: "https://drive.google.com/file/d/1QJVgZrW1T638UJCUHjpNPx4XGXjFnQrL/view?usp=drive_link"
+      },
+
+      {
+        title: "Typescript-handbook",
+        details: "Courses and texts focused on machine learning concepts and techniques.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336270/download_tn7yqg.jpg",
+
+        fileUrl: "https://drive.google.com/file/d/166ZV8gAN2R8ytPUNoLtjX_tGsj7vYfEy/view?usp=drive_link"
+
+
+      },
+
+
+      {
+        title: "Advanced Java",
+        details: "Advanced Application for the Java-2.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336208/images_xqhtbw.jpg",
+        fileUrl: "https://drive.google.com/file/d/1juDApizCOdBA4HuHcXzi6F6hKzfHYoNT/view?usp=drive_link"
+
+      },
+
+
+
+      {
+        title: "Restful Web Services",
+        details: "Web Services for the Real World.",
+        language: "English",
+
+        image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756336215/images_xovaz2.jpg",
+        fileUrl: "https://drive.google.com/file/d/1Pn-a90kj7LHVMOBXcqzUi5WYpVzm9mjy/view?usp=drive_link"
+
+
+      }
+    ],
+
+
+
+
+'Medical': [
+  {
+    title: "A System of Medicine",
+    details: "A comprehensive approach to healthcare that includes a distinct philosophy, diagnostic methods, and treatment modalities.",
+    language: "English",
+    
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756346273/download_eaafcp.jpg",
+
+    fileUrl: "https://drive.google.com/file/d/1dhkGxLvJ2iDkHdskbZR-EOm_4XM8-ZT7/view?usp=drive_link"
+  },
+
+
+
+  {
+    title: "ABC of Pathology",
+    details: "Fundamental concepts and principles in pathology.",
+    language: "English",
+   
+ image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756346371/download_pkp082.jpg",
+    
+fileUrl: "https://drive.google.com/file/d/1f5A4UxAQhDmdpUfYlNyDUd2C5BrFmZmC/view?usp=drive_link"
+  },
+
+
+  {
+    title: "Early Medical Books Catalogue",
+    details: "A catalogue documenting important early medical literature.",
+    language: "English",
+
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756346396/download_rc8rcv.jpg",
+
+    fileUrl: "https://drive.google.com/file/d/17H9wVh3JWrU0fltMBsq4_LXgu1aGRD_X/view?usp=drive_link"
+
+  },
+
+
+
+  {
+    title: "Essential Drugs",
+    details: "A guide to essential medications used worldwide.",
+    language: "English",
+    
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756346418/download_rt23ew.jpg",
+
+    fileUrl: "https://drive.google.com/file/d/1ulk3rHZpJocLMhQuMgqgo1xJozKhLyxk/view?usp=drive_link"
+  },
+
+
+
+  {
+    title: "List of 800 Old Medical Books",
+    details: "A compiled list of 800 historical medical books.",
+    language: "English",
+    
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756346444/download_wwotkm.jpg",
+
+    fileUrl: "https://drive.google.com/file/d/1J_eNC2dxsr38mYFXJuX4PpGEunGVLx7b/view?usp=drive_link"
+  },
+
+
+
+
+  {
+    title: "Medical Tracts",
+    details: "Various medical tracts focusing on diverse topics.",
+    language: "English",
+    
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756346492/download_nnuvzo.jpg",
+    
+fileUrl: "https://drive.google.com/file/d/1kVPrWtUkT1Howewf3SfNcn1_z7lExRN-/view?usp=drive_link"
+  },
+
+
+
+
+  {
+    title: "Mothers",
+    details: "Medical insights and health guides related to motherhood.",
+    language: "English",
+    
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756346517/download_zcikum.jpg",
+
+fileUrl: "https://drive.google.com/file/d/1bXBGQpRaUKMNq4lIExiuAFSM5CgAk0de/view?usp=drive_link"
+  },
+
+
+
+  {
+    title: "Textbook of Modern Medicine",
+    details: "A comprehensive textbook covering modern medical practices.",
+    language: "English",
+    
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756346536/download_pt9zxk.jpg",
+
+    fileUrl: "https://drive.google.com/file/d/1IG7kdAidHbb-FMgpNlN4S2A_PqcVsFoL/view?usp=drive_link"
+  },
+
+
+  {
+    title: "The People's Home Library",
+    details: "A collection of health and medical knowledge for general public.",
+    language: "English",
+    
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756346572/images_w3cs8f.jpg",
+
+    fileUrl: "https://drive.google.com/file/d/1LmjTXC1FJn7v4UpsLhTCh20hQzkATrdT/view?usp=drive_link"
+  },
+
+
+
+  {
+    title: "The Uterus and its Appendage",
+    details: "In-depth study of the uterus and related appendages.",
+    language: "English",
+    
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756346615/download_dki1vk.jpg",
+
+    fileUrl: "https://drive.google.com/file/d/1KjM7POJ9So-VoK0LCAoj7yYLxVpNJzZ-/view?usp=drive_link"
+  }
+
+],
+
+
+'Commerce': [
+  {
+    title: "History-Of-Commerce-And-Industry",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756347696/download_djx9w7.jpg",
+    fileUrl: "https://drive.google.com/file/d/16kpc4qefPhV1sKgGetiw5Wz2xV4xp89r/view?usp=drive_link"
+  },
+  {
+    title: "Principles-Of-Commerce",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756347735/download_ix30eh.jpg",
+    fileUrl: "https://drive.google.com/file/d/1AINazZRfawIu_TFyqcT-68EZsNxLtpvV/view?usp=drive_link"
+  },
+  {
+    title: "The-Commerce-Of-Nations--Ed-6",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756347759/download_zyuw74.jpg",
+    fileUrl: "https://drive.google.com/file/d/1w9l7-mso5vacyBOoRgrZ5UM-V9KfxiaY/view?usp=drive_link"
+  },
+  {
+    title: "Principles-And-Practice-Of-Commerce",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756347793/download_kwmoff.jpg",
+    fileUrl: "https://drive.google.com/file/d/1QnreoaOxUiAR-wBYCwezcK48nW_NuxB-/view?usp=drive_link"
+  },
+  {
+    title: "Oriental-Commerce",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756347813/download_avlewz.jpg",
+    fileUrl: "https://drive.google.com/file/d/1nRxm522c_ZHLs8Uh0g3g-wJahYb6hYF1/view?usp=drive_link"
+  },
+  {
+    title: "commerce and accountancy",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756347840/download_p1bsrm.jpg",
+    fileUrl: "https://drive.google.com/file/d/12Lw5Mr-yYg8zX9LGgSXSOL-MoBj1lOKV/view?usp=drive_link"
+  },
+  {
+    title: "A-Short",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756347875/images_lc2pcd.jpg",
+    fileUrl: "https://drive.google.com/file/d/17mbTviQxNPoZp_ud-K9TXct7AhAVxiTb/view?usp=drive_link"
+  },
+  {
+    title: "Treatise-On",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756347891/download_g56htz.jpg",
+    fileUrl: "https://drive.google.com/file/d/1f2beyz5l88OgYQaZkehAXF2yA37ncTwe/view?usp=drive_link"
+  },
+  {
+    title: "atreatiseonprin00goog",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756347941/shopping_d5fvtw.webp",
+    fileUrl: "https://drive.google.com/file/d/1DSw9nydb2F6ntqSQACznyaPGbsebcCm1/view?usp=drive_link"
+  },
+  {
+    title: "E- Commerce",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756347985/shopping_ktqlmw.webp",
+    fileUrl: "https://drive.google.com/file/d/1KqDO0XJhEjIX1DWAiLqOpJQtBNHr0Jal/view?usp=drive_link"
+  },
+  {
+    title: "E2E Process Automation Leveraging Generative AI and IDP-Based",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756348027/shopping_qspheh.webp",
+    fileUrl: "https://drive.google.com/file/d/1BcxBD_cFxKevvoGlV0_yrA1acvGJu3Dn/view?usp=drive_link"
+  },
+  {
+    title: "GAME THEORY",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756348051/shopping_ceglo4.webp",
+    fileUrl: "https://drive.google.com/file/d/1icvK6pqenWOt3IoHy1yiFzlOcqm1vaxO/view?usp=drive_link"
+  },
+  {
+    title: "historyofcommerc0000cliv_h2o2",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756348070/shopping_klhao2.webp",
+    fileUrl: "https://drive.google.com/file/d/1NpEKDswtHhvzyuKOLInvEGxPjqgy6bZ7/view?usp=drive_link"
+  },
+  {
+    title: "IntroductionToBusiness-OP",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756348111/shopping_dhnk0l.webp",
+    fileUrl: "https://drive.google.com/file/d/1KBw0rDLU-mFiQFoGB00mOOUTNvX9347d/view?usp=drive_link"
+  },
+  {
+    title: "Managerial Accounting",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756348126/shopping_dldm4w.webp",
+    fileUrl: "https://drive.google.com/file/d/1ekpZtO1x1aAIGIFE2b1qE8a8LiBVmm7j/view?usp=drive_link"
+  },
+  {
+    title: "Principles-of-Financial-Accounting",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756348167/shopping_szfzwo.webp",
+    fileUrl: "https://drive.google.com/file/d/1tMTX0MeUKJJgCv5LT3NqQvN_-ouh6rf_/view?usp=drive_link"
+  },
+  {
+    title: "tradecommerce00litm",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756348267/shopping_idg27y.webp",
+    fileUrl: "https://drive.google.com/file/d/1K9iTobRui378PUYJifXnFnZZu1XsnH9D/view?usp=drive_link"
+  },
+  {
+    title: "universaldictio2sava",
+    details: "",
+    language: "English",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756348297/shopping_lgigw7.webp",
+    fileUrl: "https://drive.google.com/file/d/1dFiQcT9Y-SIBZDQF4PT-K2IAMnBIscC3/view?usp=drive_link"
+  }
+],
+
+
+
+
+    // You can keep your other categories here like Medical, Commerce, BA, etc.
+  };
+
+  // Categories mapping to container divs in HTML
+  const categories = {
+    'Engineering': document.getElementById('engineeringNotes'),
+    'Medical': document.getElementById('medicalNotes'),
+    'Commerce': document.getElementById('commerceNotes')
+    
+     };
+
+  // Convert Google Drive view link into direct download
+  function makeDirectDownload(url) {
+    if (url.includes("drive.google.com")) {
+      let match = url.match(/\/d\/([^\/]+)\//);
+      if (match && match[1]) {
+        return `https://drive.google.com/uc?export=download&id=${match[1]}`;
+      }
+    }
+    return url; // return URL as-is if no match
+  }
+
+  // Render notes cards into the category container
+  function renderNotes(category, notes) {
+    notes.forEach(n => {
+      const card = document.createElement("div");
+      card.className = "glass p-6 rounded-xl text-center card";
+      card.innerHTML = `
+        <img src="${n.image}" alt="${n.title}" class="w-full h-40 object-cover rounded-lg mb-4" />
+        <h3 class="font-bold text-xl mb-2 text-indigo-300">${n.title}</h3>
+        <p class="text-sm text-gray-300 mb-2">${n.details}</p>
+        <p class="text-xs text-pink-400 font-semibold mb-3">Language: ${n.language}</p>
+        <a href="${makeDirectDownload(n.fileUrl)}" download 
+          class="px-4 py-2 rounded-lg font-semibold text-white 
+                 bg-gradient-to-r from-pink-500 to-yellow-500 
+                 hover:from-yellow-500 hover:to-pink-500 
+                 transition-transform transform hover:scale-105 shadow-md"
+        >
+          ⬇️ Download
+        </a>
+      `;
+      categories[category].appendChild(card);
+    });
+  }
+
+  // Render all categories immediately
+  for (const cat in manualNotes) {
+    if (categories[cat]) {
+      renderNotes(cat, manualNotes[cat]);
+    }
+  }
+
+  // Toggle background colors on button click
+  document.getElementById("toggleBtn").addEventListener("click", () => {
+    document.body.classList.toggle("bg1");
+    document.body.classList.toggle("bg2");
+  });
+</script>
+</body>
+</html>

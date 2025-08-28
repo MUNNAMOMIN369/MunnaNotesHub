@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MunnaNotesHub - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    body.bg1 {
+      background: linear-gradient(to right, #0f172a, #1e293b);
+    }
+    body.bg2 {
+      background: linear-gradient(to right, #0f766e, #2563eb);
+    }
+
+    img:hover {
+      transform: scale(1.05);
+      transition: transform 0.3s ease;
+    }
+
+    /* Glass Effect */
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    /* Cards Hover */
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    }
+
+    /* Nav Styling */
+    nav a {
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffcc70;
+      transform: translateY(-3px);
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: right;
+    }
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Heading Fonts */
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+    }
+
+    /* Toggle Button */
+    #toggleBtn {
+      background: linear-gradient(135deg, #ff512f, #dd2476);
+      transition: all 0.3s ease;
+    }
+    #toggleBtn:hover {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      transform: scale(1.05);
+    }
+
+    /* WhatsApp Floating */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .whatsapp-float:hover {
+      background-color: #20b857;
+      transform: scale(1.1);
+    }
+
+   .journey-section {
+      margin-top: 80px;   /* Heading ko neeche dhakelne ke liye */
+    }
+
+   .journey-section h2 {
+     margin-bottom: 20px; /* Niche ka gap control */
+    }
+
+  </style>
+</head>
+<body class="bg1">
+
+  <!-- Header -->
+  <header class="glass fixed w-full top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <h1 class="text-2xl font-bold flex items-center gap-2 text-indigo-300">📘 MunnaNotesHub</h1>
+      <nav class="hidden md:flex gap-6 text-lg">
+        <a href="index.html">Home</a>
+        <a href="notes.html">Notes</a>
+        <a href="videos.html">Videos</a>
+        <a href="tools.html">Tools</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </nav>
+      <button id="toggleBtn" class="px-3 py-1 rounded-lg text-white">🎨</button>
+    </div>
+  </header>
+  <!-- Hero Section -->
+  <section class="container mx-auto px-4 pt-28 pb-16 grid md:grid-cols-2 gap-10 items-stretch">
+    <!-- Left Card (Photo) -->
+    <div class="glass p-8 rounded-2xl text-center card h-full flex flex-col justify-center">
+      <img src="https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755900904/WhatsApp_Image_2025-08-23_at_03.44.39_a8b27258_xtps4p.jpg" 
+           alt="Profile Photo" 
+           class="mx-auto rounded-full border-4 border-indigo-500 shadow-xl mb-6 w-40 sm:w-48 md:w-56 lg:w-64 h-auto">
+      <h2 class="text-3xl font-bold text-indigo-300">Hi, I'm Munna 👋</h2>
+      <p class="text-gray-300 mt-2">Your study buddy with smart tools & guidance.</p>
+    </div>
+
+    <!-- Right Card (Welcome Text) -->
+    <div class="glass p-10 rounded-2xl card h-full flex flex-col justify-center">
+      <h2 class="text-4xl font-bold mb-6 text-indigo-300">Welcome to MunnaNotesHub</h2>
+      <p class="text-lg leading-relaxed text-gray-200 mb-4">
+        This is a platform built with ❤️ for students like you.  
+        Here, you’ll find curated <strong>AI tools</strong>, handwritten and digital <strong>notes</strong>, 
+        useful <strong>video tutorials</strong>, and coding practice guides.  
+        Whether you’re preparing for college exams, placements, or just exploring new tech –  
+        MunnaNotesHub is here to make your journey smoother 🚀.
+      </p>
+      <p class="text-lg leading-relaxed text-gray-200">
+        My mission is simple: to save your time, reduce stress, and help you succeed with clarity.  
+        Every resource is organized so you can focus on learning, not searching.  
+        Together, let’s make studying smart and joyful! ✨
+      </p>
+      <a href="tools.html">
+        <button class="mt-6 bg-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700">
+          Explore Now
+        </button>
+      </a>
+    </div>
+  </section>
+
+<!-- Featured Tools Section -->
+<section class="container mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold text-center mb-6 text-indigo-300">⚡ Featured AI Tools</h2>
+  <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="glass p-6 rounded-xl card">
+      <h3 class="font-bold text-xl mb-3 text-white">ChatGPT</h3>
+      <p class="text-gray-300 mb-4">Smartest AI Assistant for text & ideas.</p>
+      <a href="https://chat.openai.com" target="_blank" class="bg-indigo-500 px-4 py-2 rounded-lg text-white hover:bg-indigo-600">Try Now</a>
+    </div>
+    <div class="glass p-6 rounded-xl card">
+      <h3 class="font-bold text-xl mb-3 text-white">Claude</h3>
+      <p class="text-gray-300 mb-4">Ethical & reasoning-focused AI.</p>
+      <a href="https://claude.ai" target="_blank" class="bg-indigo-500 px-4 py-2 rounded-lg text-white hover:bg-indigo-600">Try Now</a>
+    </div>
+    <div class="glass p-6 rounded-xl card">
+      <h3 class="font-bold text-xl mb-3 text-white">Canva</h3>
+      <p class="text-gray-300 mb-4">AI-enabled graphic design platform.</p>
+      <a href="https://canva.com" target="_blank" class="bg-indigo-500 px-4 py-2 rounded-lg text-white hover:bg-indigo-600">Try Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- About Section Heading -->
+<section class="container mx-auto px-4 pt-8 pb-2 journey-section">
+  <h2 class="text-3xl font-bold text-center mb-6 text-indigo-300">✨ My Learning Journey ✨</h2>
+</section>
+
+
+
+  <!-- Extra Cards -->
+  <section class="container mx-auto px-4 py-16 grid md:grid-cols-2 gap-10">
+    <div class="glass p-8 rounded-2xl card">
+      <h3 class="text-xl font-bold mb-3 text-indigo-300">📚 Academics</h3>
+      <p class="text-gray-300">
+        Currently pursuing 7th semester in Computer Science Engineering at 
+        <strong>New Horizon College of Engineering, Bengaluru</strong>.  
+        Strong foundation in programming, data structures, and web development.  
+        Actively preparing for placements with a focus on full-stack development and real-world problem solving.
+      </p>
+    </div>
+
+    <div class="glass p-8 rounded-2xl card">
+      <h3 class="text-xl font-bold mb-3 text-indigo-300">💻 Projects</h3>
+      <ul class="list-disc list-inside text-gray-300">
+        <li><strong>Online Fraud Detection System</strong> – Built during internship, developed and deployed independently.</li>
+        <li><strong>Smart Travel Expense Planner</strong> – Full-stack web app for smart budgeting and travel planning.</li>
+        <li><strong>Number Guessing Game</strong> – Java-based console game with interactive logic and user feedback.</li>
+      </ul>
+    </div>
+
+    <div class="glass p-8 rounded-2xl card">
+      <h3 class="text-xl font-bold mb-3 text-indigo-300">📄 Resume</h3>
+      <p class="text-gray-300 mb-3">
+        I humbly ask your understanding — my resume holds pieces of me that I choose to share with care.
+      </p>
+      <a href="#" class="bg-indigo-500 px-4 py-2 rounded-lg text-white hover:bg-indigo-600">Download Resume</a>
+    </div>
+
+    <div class="glass p-8 rounded-2xl card">
+      <h3 class="text-xl font-bold mb-3 text-indigo-300">🙋 Personal Details</h3>
+      <p class="text-gray-300">
+        I’m Munna — playful, passionate, and deeply curious about technology.  
+        I chose the development field because I love building things that help people.  
+        I’m always exploring new tools, frameworks, and ideas to grow as a developer and empower students through NotesHub.
+      </p>
+    </div>
+  </section>
+
+  <!-- Testimonials / Why Choose Us -->
+  <section class="container mx-auto px-4 py-16 grid md:grid-cols-2 gap-10">
+    <div class="glass p-8 rounded-2xl card">
+      <h3 class="text-xl font-bold mb-3 text-indigo-300">🌟 Why Choose Us?</h3>
+      <p class="text-gray-300">
+        MunnaNotesHub isn’t just a platform — it’s a movement for joyful, accessible learning.  
+        Built with love, clarity, and emotional connection, it’s designed to make every student feel at home.  
+        From smart tools to heartfelt guidance, we’re here to support your journey every step of the way.
+      </p>
+    </div>
+
+    <div class="glass p-8 rounded-2xl card">
+      <h3 class="text-xl font-bold mb-3 text-indigo-300">💬 Testimonials</h3>
+      <p class="text-gray-300">
+        MunnaNotesHub feels like a friend who actually understands what students need.  
+        His tools are smart, but his warmth is what makes this platform truly special.  
+        Munna’s projects show not just skill, but soul.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="glass py-6 text-center">
+    <p class="text-gray-400">© 2025 MunnaNotesHub. All Rights Reserved.</p>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/919606365902" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.85 11.85 0 0012 0C5.37 0 0 5.37 0 12c0 2.12.55 4.19 1.6 6.01L0 24l6.19-1.62A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 21.82c-1.85 0-3.65-.5-5.23-1.44l-.38-.23-3.68.97.98-3.58-.25-.37A9.82 9.82 0 012.18 12c0-5.41 4.41-9.82 9.82-9.82 2.63 0 5.1 1.02 6.95 2.87a9.78 9.78 0 012.87 6.95c0 5.41-4.41 9.82-9.82 9.82zm5.36-7.38c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.15-.64.14-.19.29-.74.93-.9 1.12-.16.19-.33.22-.62.07-.29-.15-1.24-.46-2.36-1.48-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.55-.88-2.12-.23-.56-.47-.49-.64-.5h-.55c-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43s1.03 2.82 1.18 3.01c.15.19 2.03 3.09 4.93 4.33.69.3 1.23.48 1.65.62.69.22 1.32.19 1.82.12.56-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34z"/>
+    </svg>
+  </a>
+
+  <!-- Background Toggle Script -->
+  <script>
+    document.getElementById("toggleBtn").addEventListener("click", () => {
+      document.body.classList.toggle("bg1");
+      document.body.classList.toggle("bg2");
+    });
+  </script>
+</body>
+</html>

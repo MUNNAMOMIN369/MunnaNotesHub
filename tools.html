@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MunnaNotesHub - Videos</title>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+    }
+
+
+ h1,h3 {
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+    }
+h2,h6 {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+  color: white;
+  text-align: center;
+}
+
+
+    /* Nav underline hover */
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    }
+    /* ===== Nav Hover + Underline ===== */
+    nav a {
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffcc70;
+      transform: translateY(-3px);
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: right;
+    }
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    /* ===== Toggle Button ===== */
+    #toggleBg {
+      background: linear-gradient(135deg, #ff512f, #dd2476);
+      transition: all 0.3s ease;
+    }
+    #toggleBg:hover {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      transform: scale(1.05);
+    }
+    /* ===== Backgrounds (🎨 toggle) ===== */
+    body.bg1 {
+      background: linear-gradient(to right, #0f172a, #1e293b);
+    }
+    body.bg2 {
+      background: linear-gradient(to right, #0f766e, #2563eb);
+    }
+    /* Glass header */
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+  </style>
+</head>
+<body class="bg1 text-gray-800 transition-colors duration-500">
+  <!-- Header -->
+  <header class="glass fixed w-full top-0 left-0 z-50">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <!-- Logo -->
+      <h1 class="text-2xl font-bold flex items-center gap-2 text-indigo-300">
+        📘 MunnaNotesHub
+      </h1>
+
+      <!-- Nav -->
+      <nav class="flex gap-6 text-white font-semibold">
+        <a href="index.html">Home</a>
+        <a href="notes.html">Notes</a>
+        <a href="videos.html">Videos</a>
+        <a href="tools.html">Tools</a>
+	
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </nav>
+      <!-- Toggle Bg -->
+      <button id="toggleBg" class="px-3 py-1 rounded-lg text-white font-semibold 
+              bg-gradient-to-r from-pink-500 to-yellow-500 
+              hover:from-yellow-500 hover:to-pink-500 transition">
+        🎨
+      </button>
+    </div>
+  </header>
+
+<!-- Tools Section -->
+<section class="pt-28 container mx-auto p-6" id="toolsSection">
+  <h2 class="text-3xl font-extrabold mb-4">📚 Free Education Resources</h2>
+  <p class="text-center text-white text-lg">
+    To learn how to use the tools, click on <strong>How to Use</strong>.
+  </p>
+  <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="toolsGrid"></div>
+</section>
+
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/919606365902" target="_blank"
+     class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.85 11.85 0 0012 0C5.37 0 0 5.37 0 12c0 2.12.55 4.19 1.6 6.01L0 24l6.19-1.62A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 21.82c-1.85 0-3.65-.5-5.23-1.44l-.38-.23-3.68.97.98-3.58-.25-.37A9.82 9.82 0 012.18 12c0-5.41 4.41-9.82 9.82-9.82 2.63 0 5.1 1.02 6.95 2.87a9.78 9.78 0 012.87 6.95c0 5.41-4.41 9.82-9.82 9.82zm5.36-7.38c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.15-.64.14-.19.29-.74.93-.9 1.12-.16.19-.33.22-.62.07-.29-.15-1.24-.46-2.36-1.48-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.55-.88-2.12-.23-.56-.47-.49-.64-.5h-.55c-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43s1.03 2.82 1.18 3.01c.15.19 2.03 3.09 4.93 4.33.69.3 1.23.48 1.65.62.69.22 1.32.19 1.82.12.56-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34z"/>
+    </svg>
+  </a>
+
+<script>
+  const manualTools = [
+    { name: "ChatGPT", description: "Versatile AI assistant by OpenAI", link: "https://chat.openai.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884092/download_avhb1k.jpg" },
+
+
+    { name: "Claude", description: "Anthropic’s ethical reasoning LLM", link: "https://claude.ai", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884118/images_yzzylf.jpg" },
+
+
+    { name: "Google Gemini", description: "Google’s multimodal AI assistant", link: "https://gemini.google.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884142/download_fpxdpu.jpg" },
+
+
+    { name: "Midjourney", description: "AI image generator", link: "https://midjourney.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884162/download_cztjdr.jpg" },
+
+
+    { name: "Canva Magic Studio", description: "Design with AI", link: "https://canva.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884195/download_znnoom.jpg" },
+
+
+    { name: "Perplexity AI", description: "AI-powered search/chat assistant", link: "https://perplexity.ai", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884215/download_dtjdhl.png" },
+
+
+    { name: "ElevenLabs", description: "Lifelike AI voice generation", link: "https://elevenlabs.io", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884234/images_riwzn1.jpg" },
+
+
+    { name: "Synthesia", description: "AI video generation", link: "https://synthesia.io", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884276/download_aqp3ir.jpg" },
+
+
+    { name: "Jasper AI", description: "AI copywriting assistant", link: "https://jasper.ai", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884288/download_nvq1ya.jpg" },
+
+
+    { name: "Grammarly", description: "AI writing assistant", link: "https://grammarly.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884320/download_tdoh8r.png" },
+
+
+    { name: "Notion AI", description: "Boost productivity with AI inside Notion", link: "https://notion.so", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884352/download_zlxe7o.png" },
+
+
+    { name: "Quillbot", description: "AI paraphrasing & grammar tool", link: "https://quillbot.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884365/download_sga0fr.png" },
+
+
+    { name: "Runway ML", description: "AI video & image editing", link: "https://runwayml.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884386/download_vi0llf.jpg" },
+
+
+    { name: "Descript", description: "AI podcast & video editing", link: "https://descript.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884427/download_tiscdr.png" },
+
+
+    { name: "Copy.ai", description: "AI for copywriting & marketing", link: "https://copy.ai", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755884442/download_tptjk4.png" },
+  ];
+
+
+  const educationResources = {
+    "Books & PDFs / Textbooks": [
+      { name: "Project Gutenberg", description: "Thousands of free classic public domain books.", link: "https://www.gutenberg.org", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756331933/download_l9yicl.png" },
+
+
+      { name: "Internet Archive", description: "Massive repository: books, videos, scans, archives.", link: "https://archive.org", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333408/download_lqijdo.png" },
+
+
+      { name: "OpenStax", description: "Peer-reviewed textbooks, free PDF & online view.", link: "https://openstax.org", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333385/download_wuz8mf.png" },
+
+
+      { name: "Bookboon", description: "Engineering, business & IT free student eBooks.", link: "https://bookboon.com", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333375/download_pnqugs.png" },
+
+
+      { name: "ManyBooks", description: "Wide variety of licensed free books.", link: "https://manybooks.net", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333345/download_jgnjzt.jpg" },
+
+
+      { name: "Wikibooks", description: "Free, editable online textbooks by community.", link: "https://www.wikibooks.org", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333329/download_rtkuau.png" },
+
+
+      { name: "CK-12", description: "Interactive lessons & textbooks for K-12.", link: "https://www.ck12.org", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333315/download_qqaezg.jpg" },
+
+
+      { name: "LibreTexts", description: "Thousands of open textbooks across disciplines.", link: "https://libretexts.org", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333302/download_fuaogf.png" }
+    ],
+
+
+    "Video Learning & Multimedia": [
+      { name: "Khan Academy", description: "Videos + practice in math, sciences, humanities.", link: "https://www.khanacademy.org", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333105/download_ngu67i.png" },
+
+
+      { name: "YouTube Learning", description: "Curated university lectures & learning playlists.", link: "https://www.youtube.com/learning", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333094/download_jni8wc.jpg" },
+
+
+      { name: "MIT OCW Videos", description: "Lecture videos directly from MIT courses.", link: "https://ocw.mit.edu", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333080/images_ozhbf2.jpg" },
+
+
+      { name: "Alison", description: "Free certification courses in multiple topics.", link: "https://alison.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333053/download_ulx0fd.png" },
+
+
+      { name: "TED", description: "Educational & inspirational talks on every subject.", link: "https://www.ted.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333247/download_lmqzxd.png" },
+
+
+      { name: "TeacherTube", description: "Teacher-shared tutorials, lessons, videos.", link: "https://www.teachertube.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333021/download_xzjipo.png" },
+
+
+      { name: "BBC Learning Hub", description: "BBC’s science videos, lesson plans, resources.", link: "https://www.bbc.co.uk/learning", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333005/download_n0dem3.png" }
+    ],
+
+
+    "Free Courses / MOOCs": [
+      { name: "edX", description: "Audit free courses from top universities.", link: "https://edx.org", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332996/images_hciui9.jpg" },
+
+
+      { name: "Coursera", description: "Audit free Ivy League & global courses.", link: "https://coursera.org", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332958/download_bs3who.png" },
+
+
+      { name: "Saylor Academy", description: "Free open courses with completion certificates.", link: "https://saylor.org", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332948/download_ka2bpi.png" },
+
+
+      { name: "SWAYAM (India)", description: "Free IIT, IIM & university courses (Govt of India).", link: "https://swayam.gov.in", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332936/download_yenwwn.png" },
+
+
+      { name: "NPTEL (India)", description: "STEM video lectures & materials from IITs/IISc.", link: "https://nptel.ac.in", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332924/download_s6fo2y.png" },
+
+
+      { name: "Harvard Free Courses", description: "Harvard courses like CS50, AI & humanities free.", link: "https://pll.harvard.edu/catalog/free", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332912/download_gaysyz.png" }
+    ],
+
+
+    "OER Libraries": [
+      { name: "Open Textbook Library", description: "Peer-reviewed open textbooks by subject.", link: "https://open.umn.edu/opentextbooks", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332881/download_fdeqbt.png" },
+
+
+      { name: "OER Commons", description: "Huge digital library of open educational resources.", link: "https://oercommons.org", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332869/download_befwqk.png" },
+
+
+      { name: "MERLOT", description: "Peer-reviewed open materials: textbooks, quizzes.", link: "https://merlot.org", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332851/download_bvpnyn.png" },
+
+
+      { name: "Lumen Learning", description: "Open course content with zero textbook costs.", link: "https://lumenlearning.com", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332816/download_pbfmbl.png" },
+
+
+      { name: "College Open Textbooks", description: "Collection of open textbooks by subject.", link: "https://collegeopentextbooks.org",
+ image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332881/download_fdeqbt.png" },
+
+
+      { name: "Open Course Library", description: "OER materials designed for full courses.", link: "https://opencourselibrary.org", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332779/images_u595yo.png" },
+
+
+      { name: "WikiEducator", description: "Collaborative platform for building OER courses.", link: "https://wikieducator.org", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333329/download_rtkuau.png" },
+
+
+      { name: "FreeLearningList.org", description: "Curated free edu content: videos, podcasts, eBooks.", link: "https://freelearninglist.org", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756334493/images_a00roi.jpg" },
+
+
+      { name: "RefSeek Educational Videos", description: "Directory of 25+ video sources.", link: "https://www.refseek.com/directory/educational_videos.html",
+ image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756334251/images_vugvlv.jpg" },
+
+
+      { name: "Piqosity", description: "OER lists & resources for K-12 teaching.", link: "https://www.piqosity.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332646/download_tatmlf.png" },
+
+
+      { name: "Open Culture", description: "Free books, languages & courses curated.", link: "https://openculture.com", image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332632/download_lwbpv2.png" },
+
+
+  {
+    name: "Google Books",
+    description: "Search and preview millions of books, with many available as free downloads or previews.",
+    link: "https://books.google.com/",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333288/download_i9i1r0.jpg"
+  },
+
+  {
+    name: "National Digital Library of India (NDLI)",
+    description: "A digital repository of learning resources, offering free access to learning materials from India.",
+    link: "https://ndl.iitkgp.ac.in/",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333271/download_xgoi9r.png"
+  },
+
+  {
+    name: "OAPEN Library",
+    description: "A growing collection of freely accessible academic books in Humanities and Social Sciences.",
+    link: "https://oapen.org/",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333210/images_hfplbe.png"
+  },
+
+  {
+    name: "DOAB (Directory of Open Access Books)",
+    description: "An index of thousands of peer-reviewed academic open access books.",
+    link: "https://www.doabooks.org/",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333188/download_an3cpv.png"
+  },
+
+
+  {
+    name: "PDF Drive",
+    description: "Search engine for free PDF files, with millions of free eBooks available for download.",
+    link: "https://www.pdfdrive.com/",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333176/download_uy1nkh.png"
+  },
+
+
+  {
+    name: "Z-Library",
+    description: "One of the largest collections of free digital books and articles (mirror site).",
+    link: "https://z-lib.org/",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333157/download_hx4ew5.jpg"
+  },
+
+  {
+    name: "LibriVox",
+    description: "Free public domain audiobooks read by volunteers from around the world.",
+    link: "https://librivox.org/",
+    image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333134/download_bl0vvd.jpg"
+  }
+    ],
+
+    "Study Tools": [
+      { name: "Quizlet", description: "Flashcards & practice tests.", link: "https://quizlet.com",
+ image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332564/images_z3by18.jpg" },
+
+
+      { name: "Seneca Learning", description: "Gamified revision tools for school & exams.", link: "https://senecalearning.com", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756333244/download_usaj0y.png" 
+},
+
+
+      { name: "GOCONQR", description: "Mind maps, flashcards, notes & quizzes.", 
+link: "https://www.goconqr.com", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332492/download_daypgq.png" },
+
+
+      { name: "StudyStack", description: "Flashcards + study games.", link: "https://www.studystack.com", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332461/download_ewwbxr.png" },
+
+
+      { name: "Hippocampus", description: "Free academic videos across many subjects.", link: "https://hippocampus.org", 
+image: "https://res.cloudinary.com/dvgxrnhtd/image/upload/v1756332426/download_mbrfco.png" }
+    ]
+  };
+
+  const grid = document.getElementById("toolsGrid");
+  Object.keys(educationResources).forEach(category => {
+    // Category heading
+    const heading = document.createElement("h2");
+    heading.className = "text-2xl font-extrabold text-indigo-300 text-center tracking-wide drop-shadow-md col-span-full mt-10 mb-4";
+    heading.textContent = category;
+    grid.appendChild(heading);
+    // Cards
+    educationResources[category].forEach(tool => {
+      grid.appendChild(createToolCard(tool));
+    });
+  });
+
+  function createToolCard(tool) {
+  const card = document.createElement("div");
+  card.className = "glass p-6 rounded-xl text-center card";
+  card.innerHTML = `
+    <img src="${tool.image}" alt="${tool.name}" class="w-full h-36 object-contain rounded-lg mb-4 bg-white/10 p-2" />
+    <h3 class="font-bold text-xl mb-2 text-indigo-300">${tool.name}</h3>
+    <p class="text-sm text-gray-300 mb-4">${tool.description}</p>
+
+    <!-- Equal-width, centered buttons -->
+    <div class="flex gap-3 w-full mt-2">
+      <a href="${tool.link}" target="_blank"
+         class="flex-1 text-center px-2 py-1 rounded-lg font-semibold text-white text-xs
+                bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500
+                transition-transform transform hover:scale-105 shadow-md">
+        🔗 Visit
+      </a>
+      <a href="HowtoUse.html"
+         class="flex-1 text-center px-2 py-1 rounded-lg font-semibold text-white text-xs
+                bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-900
+                transition-transform transform hover:scale-105 shadow-md">
+        ⚙️ How to Use
+      </a>
+    </div>
+  `;
+  return card;
+}
+
+
+  // Load manual tools
+  manualTools.forEach(tool => grid.appendChild(createToolCard(tool)));
+
+  // --- Load tools from backend if available ---
+  fetch("https://your-backend-url.onrender.com/api/tools")
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(tool => grid.appendChild(createToolCard(tool)));
+    })
+    .catch(err => console.log("Backend tools not loaded:", err));
+
+  // Toggle bg
+  const toggleBtn = document.getElementById("toggleBg");
+  const body = document.body;
+  toggleBtn.addEventListener("click", () => {
+    if (body.classList.contains("bg1")) {
+      body.classList.remove("bg1");
+      body.classList.add("bg2");
+    } else {
+      body.classList.remove("bg2");
+      body.classList.add("bg1");
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - MunnaNotesHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Backgrounds */
+    body.bg1 {
+      background: linear-gradient(to right, #0f172a, #1e293b);
+    }
+    body.bg2 {
+      background: linear-gradient(to right, #0f766e, #2563eb);
+    }
+
+    /* Glass Effect */
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    /* Cards Hover */
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    }
+
+    /* Nav Styling */
+    nav a {
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffcc70;
+      transform: translateY(-3px);
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: right;
+    }
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Fonts */
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+    }
+
+    /* Toggle Button */
+    #toggleBtn {
+      background: linear-gradient(135deg, #ff512f, #dd2476);
+      transition: all 0.3s ease;
+    }
+    #toggleBtn:hover {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      transform: scale(1.05);
+    }
+
+    /* WhatsApp Floating */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .whatsapp-float:hover {
+      background-color: #20b857;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body class="bg1">
+
+  <!-- Header -->
+  <header class="glass fixed w-full top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <h1 class="text-2xl font-bold flex items-center gap-2 text-indigo-300">
+        📘 Admin Dashboard
+      </h1>
+
+      <nav class="hidden md:flex gap-6 text-lg">
+        <a href="index.html">Home</a>
+        <a href="notes.html">Notes</a>
+        <a href="videos.html">Videos</a>
+        <a href="tools.html">Tools</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <button id="toggleBtn" class="px-3 py-1 rounded-lg text-white">🎨</button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="pt-28 container mx-auto p-6">
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Add Note -->
+      <div class="glass card rounded-xl p-6">
+        <h3 class="text-xl font-bold mb-3 text-yellow-300">📝 Add Note</h3>
+        <input type="text" id="noteTitle" placeholder="Title" class="w-full p-2 rounded mb-2 bg-white/10 border border-white/20 text-white placeholder-gray-300" />
+        <input type="text" id="noteFile" placeholder="File URL" class="w-full p-2 rounded mb-2 bg-white/10 border border-white/20 text-white placeholder-gray-300" />
+        <select id="noteCategory" class="w-full p-2 rounded mb-2 bg-white/10 border border-white/20 text-white">
+          <option>Engineering</option><option>Medical</option><option>Commerce</option><option>BA</option><option>Diploma</option><option>ITI</option>
+        </select>
+        <button onclick="addNote()" class="w-full py-2 rounded-lg font-bold bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500 transition">Add Note</button>
+      </div>
+
+      <!-- Add Video -->
+      <div class="glass card rounded-xl p-6">
+        <h3 class="text-xl font-bold mb-3 text-yellow-300">🎥 Add Video</h3>
+        <input type="text" id="videoTitle" placeholder="Title" class="w-full p-2 rounded mb-2 bg-white/10 border border-white/20 text-white placeholder-gray-300" />
+        <input type="text" id="videoUrl" placeholder="YouTube Embed URL" class="w-full p-2 rounded mb-2 bg-white/10 border border-white/20 text-white placeholder-gray-300" />
+        <button onclick="addVideo()" class="w-full py-2 rounded-lg font-bold bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500 transition">Add Video</button>
+      </div>
+
+      <!-- Add Tool -->
+      <div class="glass card rounded-xl p-6">
+        <h3 class="text-xl font-bold mb-3 text-yellow-300">🛠️ Add Tool</h3>
+        <input type="text" id="toolName" placeholder="Name" class="w-full p-2 rounded mb-2 bg-white/10 border border-white/20 text-white placeholder-gray-300" />
+        <input type="text" id="toolImg" placeholder="Image URL" class="w-full p-2 rounded mb-2 bg-white/10 border border-white/20 text-white placeholder-gray-300" />
+        <input type="text" id="toolDesc" placeholder="Description" class="w-full p-2 rounded mb-2 bg-white/10 border border-white/20 text-white placeholder-gray-300" />
+        <button onclick="addTool()" class="w-full py-2 rounded-lg font-bold bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500 transition">Add Tool</button>
+      </div>
+    </div>
+
+    <!-- Existing Items -->
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold text-center mb-6 text-indigo-300">📚 Existing Notes</h2>
+      <div id="notesGrid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+
+      <h2 class="text-2xl font-bold text-center my-6 text-indigo-300">🎬 Existing Videos</h2>
+      <div id="videosGrid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+
+      <h2 class="text-2xl font-bold text-center my-6 text-indigo-300">⚙️ Existing Tools</h2>
+      <div id="toolsGrid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+    </section>
+  </main>
+
+  <!-- WhatsApp Floating -->
+  <a href="https://wa.me/7019964008" target="_blank" class="whatsapp-float">💬</a>
+
+  <script>
+    const API = "http://localhost:5000"; // future backend endpoint
+
+    // Background Toggle
+    document.getElementById("toggleBtn").addEventListener("click", () => {
+      document.body.classList.toggle("bg1");
+      document.body.classList.toggle("bg2");
+    });
+
+    // Dummy Functions (future backend integration)
+    function addNote() {
+      const title = document.getElementById("noteTitle").value;
+      const file = document.getElementById("noteFile").value;
+      const category = document.getElementById("noteCategory").value;
+      if (!title || !file) return alert("⚠️ Fill all fields!");
+      alert(`✅ Note added: ${title} (${category}) [Demo Only]`);
+      // future: fetch(`${API}/notes`, { method: "POST", body: JSON.stringify({title, file, category}) })
+    }
+
+    function addVideo() {
+      const title = document.getElementById("videoTitle").value;
+      const url = document.getElementById("videoUrl").value;
+      if (!title || !url) return alert("⚠️ Fill all fields!");
+      alert(`✅ Video added: ${title} [Demo Only]`);
+    }
+
+    function addTool() {
+      const name = document.getElementById("toolName").value;
+      const img = document.getElementById("toolImg").value;
+      const desc = document.getElementById("toolDesc").value;
+      if (!name || !img || !desc) return alert("⚠️ Fill all fields!");
+      alert(`✅ Tool added: ${name} [Demo Only]`);
+    }
+  </script>
+</body>
+</html>

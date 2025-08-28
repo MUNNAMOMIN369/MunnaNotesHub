@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to Use – Free Student Platforms (Step‑by‑Step Cards)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+      background: linear-gradient(to right, #0f172a, #1e293b);
+    }
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+      color: #c7d2fe; /* lighter indigo-ish */
+    }
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    }
+    nav a {
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+      color: #f1f5f9;
+    }
+    nav a:hover {
+      color: #ffcc70;
+      transform: translateY(-3px);
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: right;
+    }
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    input:focus, select:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgb(168 85 247 / 0.5);
+      border-color: #a855f7;
+    }
+ /* ===== Backgrounds (🎨 toggle) ===== */
+    body.bg1 {
+      background: linear-gradient(to right, #0f172a, #1e293b);
+      color: white;
+      transition: background 0.6s ease;
+    }
+    body.bg2 {
+      background: linear-gradient(to right, #0f766e, #2563eb);
+      color: white;
+      transition: background 0.6s ease;
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="glass fixed w-full top-0 left-0 z-50 py-4">
+    <div class="container mx-auto flex justify-between items-center px-6">
+      <h1 class="text-2xl font-bold text-indigo-300">📘 MunnaNotesHub</h1>
+      <nav class="flex gap-6 text-white font-semibold">
+        <a href="index.html">Home</a>
+        <a href="notes.html">Notes</a>
+        <a href="videos.html">Videos</a>
+        <a href="tools.html">Tools</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </nav>
+      <button id="toggleBtn" class="px-3 py-1 rounded-lg text-white font-semibold bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500 transition">🎨</button>
+    </div>
+  </header>
+
+  <!-- Controls Section -->
+  <section id="controls" class="container mx-auto px-6 pt-28 pb-6 max-w-7xl">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <label class="block text-white">
+        <span class="font-semibold mb-1 block">Search platform or step</span>
+        <input id="search" type="text" placeholder="e.g., Gutenberg, PDF, audit course" class="mt-1 w-full rounded-2xl border border-gray-300 bg-transparent py-2 px-4 text-gray-100 placeholder-gray-400" />
+      </label>
+      <label class="block text-white">
+        <span class="font-semibold mb-1 block">Category</span>
+        <select id="category" class="mt-1 w-full rounded-2xl border border-gray-300 bg-transparent py-2 px-4 text-gray-100">
+          <option value="all">All categories</option>
+          <option>Textbooks & PDFs</option>
+          <option>Video Lessons & Multimedia</option>
+          <option>Courses & MOOCs</option>
+          <option>OER Repositories & Mixed</option>
+          <option>Study Tools & Flashcards</option>
+        </select>
+      </label>
+      <label class="block text-white">
+        <span class="font-semibold mb-1 block">Sort</span>
+        <select id="sort" class="mt-1 w-full rounded-2xl border border-gray-300 bg-transparent py-2 px-4 text-gray-100">
+          <option value="az">A → Z</option>
+          <option value="cat">By category</option>
+        </select>
+      </label>
+    </div>
+
+  </section>
+
+  <!-- Cards Grid -->
+  <main class="container mx-auto max-w-7xl px-6 pb-16">
+    <div id="cards" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+  </main>
+
+  <!-- Card Template -->
+  <template id="cardTemplate">
+    <article class="card glass rounded-2xl border border-white/20 p-6 flex flex-col gap-4 text-white shadow-lg">
+      <div class="flex items-start gap-4">
+        <div class="flex-1">
+          <h2 class="platform-title text-2xl font-semibold"></h2>
+          <div class="mt-1">
+            <span class="category inline-block rounded-full bg-white/20 px-3 py-1 text-xs font-medium tracking-wide"></span>
+          </div>
+        </div>
+
+
+
+        <div class="flex gap-2 shrink-0">
+          <a class="visitBtn px-4 py-2 rounded-lg font-semibold bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500 shadow-md text-sm" target="_blank" rel="noopener" href="#">Visit</a>
+
+
+          <button class="shareBtn px-3 py-2 rounded-lg border border-white/30 text-sm hover:bg-white/20 transition" title="Copy direct link">🔗 Link</button>
+        </div>
+      </div>
+
+
+
+      <div class="text-sm text-gray-300 leading-relaxed">
+        <h3 class="font-semibold mb-1">What you get</h3>
+        <p class="benefit"></p>
+      </div>
+      <div class="text-sm">
+        <h3 class="font-semibold mb-1">Step-by-step</h3>
+        <ol class="steps list-decimal pl-6 space-y-1"></ol>
+      </div>
+      <div class="text-sm">
+        <h3 class="font-semibold mb-1">Pro tips</h3>
+        <ul class="tips list-disc pl-6 space-y-1"></ul>
+      </div>
+      <details class="text-sm text-gray-400">
+        <summary class="cursor-pointer select-none font-semibold">Troubleshooting & notes</summary>
+        <ul class="notes list-disc pl-6 space-y-1 mt-1"></ul>
+      </details>
+      <div class="mt-auto pt-2 flex flex-wrap gap-4 text-xs text-gray-400">
+        <span class="inline-flex items-center gap-1">⏱️ <span class="time"></span></span>
+        <span class="inline-flex items-center gap-1">🎯 <span class="skill"></span></span>
+      </div>
+    </article>
+  </template>
+
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/919606365902" target="_blank"
+   class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg z-50">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M20.52 3.48A11.85 11.85 0 0012 0C5.37 0 0 5.37 0 12c0 2.12.55 4.19 1.6 6.01L0 24l6.19-1.62A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 21.82c-1.85 0-3.65-.5-5.23-1.44l-.38-.23-3.68.97.98-3.58-.25-.37A9.82 9.82 0 012.18 12c0-5.41 4.41-9.82 9.82-9.82 2.63 0 5.1 1.02 6.95 2.87a9.78 9.78 0 012.87 6.95c0 5.41-4.41 9.82-9.82 9.82zm5.36-7.38c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.15-.64.14-.19.29-.74.93-.9 1.12-.16.19-.33.22-.62.07-.29-.15-1.24-.46-2.36-1.48-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.55-.88-2.12-.23-.56-.47-.49-.64-.5h-.55c-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43s1.03 2.82 1.18 3.01c.15.19 2.03 3.09 4.93 4.33.69.3 1.23.48 1.65.62.69.22 1.32.19 1.82.12.56-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34z"/>
+  </svg>
+</a>
+
+
+
+  <script>
+    // ------- Data (edit/extend here) -------
+    const platforms = [
+      // === Core Books / OER ===
+      {
+        id: 'project-gutenberg', name: 'Project Gutenberg', category: 'Textbooks & PDFs', url: 'https://www.gutenberg.org/',
+        benefit: 'Legal, free public‑domain eBooks (classics). Download EPUB/Kindle/PDF or read online.',
+        steps: [
+          'Open the site and use the search bar for a title/author (e.g., "Pride and Prejudice").',
+          'On the book page, pick a format: EPUB (for most readers), Kindle (.mobi), HTML, or Plain Text.',
+          'Click “Download” or “Read this book online”.',
+          'Send EPUB/Kindle to your device/app (Kindle app, Apple Books, etc.).',
+          'Explore “Bookshelves” or “Top 100” for curated lists.'
+        ],
+        tips: [
+          'Prefer "EPUB with images" for illustrated books.',
+          'Kindle users can email the .epub to your Send‑to‑Kindle address.',
+          'If fonts look odd in TXT, use the UTF‑8 version.'
+        ],
+        notes: [
+          'Newer copyrighted books are generally not available.',
+          'No account required.'
+        ],
+        time: '2–5 min to get your first book', skill: 'Beginner'
+      },
+
+
+
+      {
+        id: 'internet-archive', name: 'Internet Archive', category: 'Textbooks & PDFs', url: 'https://archive.org/',
+        benefit: 'Millions of books, videos, audio, software; some lendable (controlled digital lending).',
+        steps: [
+          'Search for a title/ISBN/topic. Use left filters (Media Type, Year, Language).',
+          'Click a result. If it says “Borrow”, sign in to borrow a 1‑hour or 14‑day loan.',
+          'For free items, use “PDF”, “EPUB”, or “Full Text” to view/download.',
+          'Use the built‑in Book Reader (flip view) for scanned books.',
+          'Check the item’s “Download Options” for all available formats.'
+        ],
+        tips: [
+          'Create a free account to borrow and make collections.',
+          'Try the Wayback Machine for archived web pages (menu ▶ Web).'
+        ],
+        notes: [
+          'Borrowed books may have waitlists; try alternate editions/years.',
+          'Some items stream only and cannot be downloaded.'
+        ],
+        time: '3–6 min', skill: 'Beginner'
+      },
+
+
+
+      {
+        id: 'openstax', name: 'OpenStax', category: 'Textbooks & PDFs', url: 'https://openstax.org/',
+        benefit: 'Peer‑reviewed college‑level textbooks. Free online + downloadable PDF; instructor resources.',
+        steps: [
+          'Go to Subjects ▶ choose your textbook (e.g., Calculus, Biology).',
+          'Click “Read online” for the web version or “Download a PDF”.',
+          'Use table of contents to jump to chapters; search within the book.',
+          'Optional: create a free account to save notes and access resources.',
+          'Instructors can access test banks and slides (verification may be required).'
+        ],
+        tips: [
+          'Check the “Errata” section for corrections.',
+          'Pair with Khan Academy practice for the same topic.'
+        ],
+        notes: [
+          'Printed copies available for a fee (optional).'
+        ],
+        time: '2–4 min', skill: 'Beginner'
+      },
+
+
+      {
+        id: 'mit-ocw', name: 'MIT OpenCourseWare (OCW)', category: 'Textbooks & PDFs', url: 'https://ocw.mit.edu/',
+        benefit: 'Free course sites with syllabi, lecture notes, assignments, some with video.',
+        steps: [
+          'Search by course number/title (e.g., 6.006) or browse by department.',
+          'Open a course page; review Syllabus for structure & prerequisites.',
+          'Use “Lecture Notes” / “Readings” / “Assignments” tabs to access materials.',
+          'Download files (PDF/ZIP) for offline study when available.',
+          'Look for “Instructor Insights” to learn how to approach the course.'
+        ],
+        tips: [
+          'Some OCW courses include full video lectures or playlists.',
+          'No login needed; learn at your own pace.'
+        ],
+        notes: [
+          'No certificates/grades; it’s self‑study.',
+          'Content versions vary by year.'
+        ],
+        time: '3–6 min', skill: 'Beginner–Intermediate'
+      },
+
+
+      {
+        id: 'open-textbook-library', name: 'Open Textbook Library', category: 'Textbooks & PDFs', url: 'https://open.umn.edu/opentextbooks',
+        benefit: 'Catalog of openly licensed, peer‑reviewed textbooks across subjects.',
+        steps: [
+          'Search by subject/keyword and open a textbook page.',
+          'Read peer reviews to gauge quality and level.',
+          'Click the format link (PDF, web) to access the book.',
+          'Check license (usually CC) to know reuse permissions.'
+        ],
+        tips: [
+          'Use filters for level (intro/advanced) and publisher.',
+          'Combine with LibreTexts for supplemental chapters.'
+        ],
+        notes: [
+          'Availability of formats varies by title.'
+        ],
+        time: '2–4 min', skill: 'Beginner'
+      },
+
+
+      {
+        id: 'oer-commons', name: 'OER Commons', category: 'Textbooks & PDFs', url: 'https://www.oercommons.org/',
+        benefit: 'Large library of open educational resources: lessons, textbooks, modules, assessments.',
+        steps: [
+          'Search a topic and filter by Education Level and Material Type.',
+          'Open a resource page and check its license & alignment tags.',
+          'Preview online; download if files are provided.',
+          'Create a free account to save to folders or remix content.'
+        ],
+        tips: [
+          'Try the Hub collections for curated sets (e.g., state/subject hubs).',
+          'Use the “OER Authoring” tool to build/share your own.'
+        ],
+        notes: [
+          'Quality varies; prefer resources with reviews or endorsements.'
+        ],
+        time: '3–6 min', skill: 'Beginner'
+      },
+
+
+
+      // === Textbooks & PDFs (extra) ===
+      { id:'bookboon', name:'Bookboon', category:'Textbooks & PDFs', url:'https://bookboon.com/',
+        benefit:'Business, engineering, IT eBooks. Many free titles for students (account may be required).',
+        steps:[
+          'Search a topic (e.g., Excel, Thermodynamics).',
+          'Open a title and click “Download”.',
+          'Sign in / create a free account if prompted.',
+          'Read the PDF on any device.'
+        ],
+        tips:[ 'Use category pages to find series or short guides.' ],
+        notes:[ 'Some content may require a subscription; look for Free tags.' ],
+        time:'2–4 min', skill:'Beginner' },
+
+
+      { id:'manybooks', name:'ManyBooks', category:'Textbooks & PDFs', url:'https://manybooks.net/',
+        benefit:'Free & discounted eBooks; strong public‑domain catalog.',
+        steps:[ 'Browse genres or search an author/title.', 'Choose EPUB/Kindle/PDF or read online.', 'Optional: create an account to track downloads.' ],
+        tips:[ 'Check “Free” filter to avoid paid listings.' ],
+        notes:[ 'Modern titles may be paid or time‑limited offers.' ], time:'2–4 min', skill:'Beginner' },
+
+
+      { id:'wikibooks', name:'Wikibooks', category:'Textbooks & PDFs', url:'https://www.wikibooks.org/',
+        benefit:'Community‑written open textbooks; editable and evolving.',
+        steps:[ 'Enter a subject and open a book module.', 'Use “Printable version” or “Download as PDF” (if enabled).', 'Follow the table of contents to study sequentially.' ],
+        tips:[ 'Check the book’s completion status banner.', 'Review talk pages for updates/quality.' ],
+        notes:[ 'Coverage and depth vary by topic.' ], time:'2–4 min', skill:'Beginner' },
+
+
+      { id:'ck12', name:'CK‑12', category:'Textbooks & PDFs', url:'https://www.ck12.org/',
+        benefit:'K‑12 FlexBooks, interactive lessons, practice and simulations.',
+        steps:[ 'Create a free student/teacher account.', 'Pick a subject (Math, Science, etc.).', 'Open a “FlexBook” and study sections with examples.', 'Do practice questions; view explanations.', 'Download as PDF where available.' ],
+        tips:[ 'Teachers can assemble custom books for classes.', 'Use simulations for concept visualization.' ],
+        notes:[ 'Some features need login; progress syncing requires account.' ], time:'3–6 min', skill:'Beginner' },
+
+
+      { id:'libretexts', name:'LibreTexts', category:'Textbooks & PDFs', url:'https://libretexts.org/',
+        benefit:'Thousands of open textbooks across disciplines; remix tools.',
+        steps:[ 'Select a library (Chem, Bio, Engr, etc.).', 'Search topic; open a page or full book.', 'Use sidebar ToC to navigate.', 'Click “Download Page”/“PDF” where enabled for offline.', 'Use Remixer (advanced) to build custom books.' ],
+        tips:[ 'Look for campus‑verified or instructor‑curated books.', 'Cross‑search multiple libraries for depth.' ],
+        notes:[ 'PDF generation may take time or be per‑page on some texts.' ], time:'3–7 min', skill:'Beginner–Intermediate' },
+
+      // === Video / Multimedia ===
+      { id:'khan-academy', name:'Khan Academy', category:'Video Lessons & Multimedia', url:'https://www.khanacademy.org/',
+        benefit:'Short videos + practice for Math, Science, CS, Arts, and more. Free with account.',
+        steps:[ 'Sign up (student) or continue without login to sample.', 'Pick a course (e.g., Algebra 1) ▶ “Start”.', 'Watch the video, then do practice problems.', 'Track mastery; redo weak skills.', 'Use “Unit test”/“Course challenge” to assess.' ],
+        tips:[ 'Turn on subtitles & transcript; perfect for revision.', 'Daily goals help consistency.' ],
+        notes:[ 'Some teacher tools require class codes.' ], time:'3–8 min (per lesson)', skill:'Beginner' },
+      { id:'youtube-edu', name:'YouTube Learning / EDU', category:'Video Lessons & Multimedia', url:'https://www.youtube.com/education',
+        benefit:'Playlists and channels for academic topics, lectures, how‑tos.',
+        steps:[ 'Search topic + “lecture”/“playlist” (e.g., “signals systems playlist”).', 'Open an EDU playlist; use Play All.', 'Use chapters to jump within long videos.', 'Save to Watch Later / custom playlist.' ],
+        tips:[ 'Sort by duration & upload date for quality/recency.', 'Check description for slides/links.' ],
+        notes:[ 'Beware of non‑authoritative content; vet the channel.' ], time:'1–3 min to find; variable to watch', skill:'Beginner' },
+      { id:'mit-ocw-videos', name:'MIT OCW Videos', category:'Video Lessons & Multimedia', url:'https://ocw.mit.edu/collections/ocw-scholar-courses/',
+        benefit:'Curated OCW Scholar/Video courses with full lecture series.',
+        steps:[ 'Open a Scholar/Video course.', 'Use “Video Lectures” to stream; many have transcripts.', 'Download lecture materials (notes/assignments) from tabs.', 'Follow weekly sequence as outlined.' ],
+        tips:[ 'Pair with OCW problem sets for practice.', 'Use playback speed controls for review.' ],
+        notes:[ 'No certificates; purely self‑paced learning.' ], time:'3–6 min', skill:'Beginner–Intermediate' },
+      { id:'alison', name:'Alison', category:'Video Lessons & Multimedia', url:'https://alison.com/',
+        benefit:'Free online courses with modules & assessments; optional paid certificates.',
+        steps:[ 'Create a free account and search a course.', 'Click “Start Now” to begin modules.', 'Complete topic quizzes; review wrong answers.', 'Finish final assessment to qualify for certificate (optional purchase).' ],
+        tips:[ 'Use course reviews and duration estimates before starting.', 'Export your learner record if needed.' ],
+        notes:[ 'Certificates/diplomas often require payment to download.' ], time:'5–10 min to start', skill:'Beginner' },
+      { id:'ted', name:'TED', category:'Video Lessons & Multimedia', url:'https://www.ted.com/',
+        benefit:'Inspiring talks across tech, education, design, science, and more.',
+        steps:[ 'Search by topic or browse playlists.', 'Open a talk; turn on subtitles and transcript.', 'Save to your profile or share.', 'Use “Related talks” to go deeper.' ],
+        tips:[ 'Great for ideas and perspectives, not step‑by‑step coursework.', 'Use Short talks for quick inspiration.' ],
+        notes:[ 'Not a replacement for textbooks/courses.' ], time:'1–2 min to find; ~10–18 min per talk', skill:'Beginner' },
+      { id:'teachertube', name:'TeacherTube', category:'Video Lessons & Multimedia', url:'https://www.teachertube.com/',
+        benefit:'Teacher‑shared classroom videos, resources, and lesson ideas.',
+        steps:[ 'Search by subject/grade.', 'Open a video/resource page.', 'Use related resources and comments for context.', 'Save to account collections (optional).' ],
+        tips:[ 'Useful for K‑12 lesson hooks and activities.', 'Check upload date for relevancy.' ],
+        notes:[ 'Video quality varies; verify accuracy.' ], time:'2–4 min', skill:'Beginner' },
+      { id:'bbc-learning-hub', name:'BBC Learning Hub (Bitesize/Teach)', category:'Video Lessons & Multimedia', url:'https://www.bbc.co.uk/bitesize',
+        benefit:'K‑12 aligned lessons, videos, and teacher plans (UK‑based but broadly useful).',
+        steps:[ 'Open Bitesize (students) or BBC Teach (teachers).', 'Pick a Key Stage/age group and subject.', 'Work through lesson pages with short videos & quizzes.', 'Download lesson plans/resources (where offered).' ],
+        tips:[ 'Great concise explanations for revision.', 'Mind the UK curriculum terms; map to your syllabus.' ],
+        notes:[ 'Some content geo‑limited; use text versions if video blocked.' ], time:'2–4 min', skill:'Beginner' },
+
+      // === MOOCs / Courses ===
+      { id:'edx', name:'edX', category:'Courses & MOOCs', url:'https://www.edx.org/',
+        benefit:'University‑level courses. Audit (free) or Verified (paid certificate).',
+        steps:[ 'Search a course and open its page.', 'Click “Enroll” ▶ choose “Audit This Course” (if available).', 'Start the course; follow week‑by‑week modules.', 'Do graded (if allowed in audit) or ungraded activities.', 'Upgrade only if you need a verified certificate.' ],
+        tips:[ 'Set course deadlines to stay on track.', 'Use discussion forums to clarify doubts.' ],
+        notes:[ 'Not all courses offer audit; some are self‑paced.' ], time:'3–6 min to enroll', skill:'Beginner–Intermediate' },
+      { id:'coursera', name:'Coursera', category:'Courses & MOOCs', url:'https://www.coursera.org/',
+        benefit:'Top‑university courses. Many offer free “Audit” access to videos/readings.',
+        steps:[ 'Open a course ▶ click “Enroll for Free”.', 'Choose “Audit” / “Full Course, No Certificate” (if shown).', 'Access videos, readings, some quizzes.', 'Complete at your pace; upgrade if certificate needed.' ],
+        tips:[ 'If audit option hidden, try “View all” pricing/“Audit” link on the page.', 'Financial aid available for some courses/certificates.' ],
+        notes:[ 'Specializations often restrict graded items in audit mode.' ], time:'3–6 min', skill:'Beginner–Intermediate' },
+      { id:'saylor', name:'Saylor Academy', category:'Courses & MOOCs', url:'https://www.saylor.org/',
+        benefit:'Fully free courses with unit quizzes and final exams; free course completion certificate.',
+        steps:[ 'Create a free account and pick a course (e.g., BUS210).', 'Work through units and readings (open materials).', 'Pass the final exam to complete the course.', 'Download your completion certificate.' ],
+        tips:[ 'Some courses offer optional proctored exams for credit (fee).', 'Self‑paced and lightweight—good for refreshers.' ],
+        notes:[ 'Proctored credit pathways require identity verification.' ], time:'5–10 min to start', skill:'Beginner' },
+      { id:'swayam', name:'SWAYAM (India)', category:'Courses & MOOCs', url:'https://swayam.gov.in/',
+        benefit:'Government platform with IIT/IIM/NPTEL courses; free to learn, optional paid exams.',
+        steps:[ 'Sign in with email/phone and search a course.', 'Click “Enroll” to join the running session.', 'Watch weekly videos and submit assignments.', 'Register for the proctored exam if you want a certificate (fee).', 'Download transcripts/notes when available.' ],
+        tips:[ 'Check course timeline and exam dates early.', 'Use discussion forums for clarifications.' ],
+        notes:[ 'Certificates issued only after proctored exam + assignment score.' ], time:'4–8 min', skill:'Beginner–Intermediate' },
+      { id:'nptel', name:'NPTEL (India)', category:'Courses & MOOCs', url:'https://nptel.ac.in/',
+        benefit:'Video lectures and materials from IITs/IISc; free learning with optional exam.',
+        steps:[ 'Find a course via “Courses” search or discipline filter.', 'Enroll for the active run to submit assignments.', 'Watch module videos (YouTube hosted) and attempt assignments.', 'Register for the proctored exam (fee) for certificate.' ],
+        tips:[ 'Read the FAQ for assignment/exam weightage.', 'Join the course forum for announcements.' ],
+        notes:[ 'Archived courses allow video access but not assignment submission.' ], time:'3–6 min', skill:'Beginner–Intermediate' },
+      { id:'harvard-free', name:'Harvard Free Courses (CS50 etc.)', category:'Courses & MOOCs', url:'https://online-learning.harvard.edu/catalog?free=1',
+        benefit:'Selection of Harvard courses open for free auditing (not all give certificates).',
+        steps:[ 'Open the catalog and apply the “Free” filter.', 'Pick a course; check start date and platform (edX/Harvard Online).', 'Enroll in audit mode as instructed.', 'Follow weekly modules and assignments (if open).'],
+        tips:[ 'CS50 has its own site with problem sets & community.', 'Expect rigorous workload—plan time.' ],
+        notes:[ 'Certificates may require payment or specific tracks.' ], time:'4–8 min', skill:'Intermediate' },
+
+      // === OER & Mixed Repositories ===
+      { id:'merlot', name:'MERLOT', category:'OER Repositories & Mixed', url:'https://www.merlot.org/',
+        benefit:'Peer‑reviewed open materials: modules, textbooks, quizzes, assignments.',
+        steps:[ 'Search by keyword and filter by material type.', 'Open a material page and review peer ratings.', 'Access the linked resource (external site).', 'Bookmark to your MERLOT profile (optional).' ],
+        tips:[ 'Sort by peer review and user ratings for quality.', 'Look for discipline collections.' ],
+        notes:[ 'MERLOT often links out; check licenses on the destination site.' ], time:'3–6 min', skill:'Beginner' },
+      { id:'lumen', name:'Lumen Learning', category:'OER Repositories & Mixed', url:'https://lumenlearning.com/',
+        benefit:'OER‑based courses and open textbooks (many pages are freely viewable).',
+        steps:[ 'Browse “Courses” and pick a subject.', 'Open a course to preview units and readings.', 'Use open textbook pages directly for study.' ],
+        tips:[ 'If a page prompts for LMS, search the open textbook title on the site.', 'Great for topic outlines.' ],
+        notes:[ 'Some offerings are institution‑integrated; not all tools are public.' ], time:'2–4 min', skill:'Beginner' },
+      { id:'college-open-textbooks', name:'College Open Textbooks', category:'OER Repositories & Mixed', url:'https://collegeopentextbooks.org/',
+        benefit:'Directory of open textbooks by subject and publisher.',
+        steps:[ 'Open the catalog/directory.', 'Select a subject to view available books.', 'Follow links to the hosting sites to download.' ],
+        tips:[ 'Cross‑check with Open Textbook Library for reviews.', 'Verify license (usually CC) on the source site.' ],
+        notes:[ 'Links lead to external repositories.' ], time:'2–4 min', skill:'Beginner' },
+      { id:'open-course-library', name:'Open Course Library', category:'OER Repositories & Mixed', url:'https://opencourselibrary.org/',
+        benefit:'Course materials (syllabi, readings, assessments) originally built for WA community colleges.',
+        steps:[ 'Browse the course list by discipline.', 'Open a course; materials often hosted on Google Drive.', 'Download syllabus, assignments, and readings.' ],
+        tips:[ 'Use as a course template; adapt to your needs.', 'Pair with LibreTexts/OpenStax for textbooks.' ],
+        notes:[ 'Some links may be archived; try alternate mirrors if needed.' ], time:'3–6 min', skill:'Beginner' },
+      { id:'wikieducator', name:'WikiEducator', category:'OER Repositories & Mixed', url:'https://wikieducator.org/',
+        benefit:'Collaborative platform to create and share open courses and lesson materials.',
+        steps:[ 'Search topics or browse featured content.', 'Open course pages and follow sequences/activities.', 'Download or copy content under open licenses.' ],
+        tips:[ 'Check page history and talk for activity/quality.', 'Fork to your own workspace if contributing.' ],
+        notes:[ 'Formatting varies; some pages are drafts.' ], time:'2–4 min', skill:'Beginner' },
+      { id:'freelearninglist', name:'FreeLearningList.org', category:'OER Repositories & Mixed', url:'https://freelearninglist.org/',
+        benefit:'Curated links to free educational content: videos, podcasts, eBooks, courses.',
+        steps:[ 'Open a category (e.g., “Books” or “Courses”).', 'Browse the curated links and descriptions.', 'Click through to the source and use as directed.' ],
+        tips:[ 'Use Ctrl/Cmd+F to quick‑find topics on long pages.' ],
+        notes:[ 'External links vary in quality—vet before relying.' ], time:'2–3 min', skill:'Beginner' },
+      { id:'refseek-videos', name:'RefSeek – Educational Videos Directory', category:'OER Repositories & Mixed', url:'https://www.refseek.com/directory',
+        benefit:'Meta‑directory that links to many academic video/resources sites.',
+        steps:[ 'Open the “Videos”/“Education” sections.', 'Pick a listed site (e.g., Academic Earth, Open Culture).', 'Use the chosen platform as per its guide.' ],
+        tips:[ 'Great starting point when you don’t know the best source.', 'Bookmark your favorite sub‑sites.' ],
+        notes:[ 'It’s a directory, not a content host.' ], time:'2–3 min', skill:'Beginner' },
+      { id:'piqosity-k12-oer', name:'Piqosity – K‑12 OER Lists', category:'OER Repositories & Mixed', url:'https://www.piqosity.com/',
+        benefit:'Blogs and guides that often point to K‑12 resources and practice links.',
+        steps:[ 'Open the Blog/Resources section.', 'Look for roundup posts on free/OER materials.', 'Follow links to the original providers.' ],
+        tips:[ 'Use as a discovery aid; always verify licensing on target sites.' ],
+        notes:[ 'Not all materials are OER; treat as curated links.' ], time:'2–3 min', skill:'Beginner' },
+      { id:'open-culture', name:'Open Culture', category:'OER Repositories & Mixed', url:'https://www.openculture.com/',
+        benefit:'Huge lists of free courses, audiobooks, language lessons, movies, and eBooks.',
+        steps:[ 'Go to the “Free” mega‑lists (e.g., Free Online Courses).', 'Use Ctrl/Cmd+F to find your subject.', 'Click through to the provider to start learning.' ],
+        tips:[ 'Great for language learning and classics.', 'Bookmark the Master Lists for later.' ],
+        notes:[ 'Content lives on external sites; availability can change.' ], time:'2–4 min', skill:'Beginner' },
+
+      // === Study Tools ===
+      { id:'quizlet', name:'Quizlet', category:'Study Tools & Flashcards', url:'https://quizlet.com/',
+        benefit:'Flashcards, practice tests, and game modes for memorization.',
+        steps:[ 'Search a topic and filter by “Verified” sets when possible.', 'Study with Flashcards ▶ Learn ▶ Test ▶ Match.', 'Create your own set (terms & definitions) for exams.', 'Use mobile app for spaced practice.' ],
+        tips:[ 'Shuffle & hide learned cards to focus on weak areas.', 'Images & audio help for languages.' ],
+        notes:[ 'Some premium modes may be locked; basics are free.' ], time:'2–4 min', skill:'Beginner' },
+      { id:'seneca', name:'Seneca Learning', category:'Study Tools & Flashcards', url:'https://senecalearning.com/',
+        benefit:'Gamified revision courses (popular in UK GCSE/A‑Level).',
+        steps:[ 'Create a free account and pick your course level.', 'Join a course and complete short interactive sessions.', 'Track XP and streaks to stay motivated.' ],
+        tips:[ 'Great for quick topic refreshers.', 'Teachers can create classes for tracking.' ],
+        notes:[ 'Curriculum is UK‑focused; still useful for concepts.' ], time:'2–4 min', skill:'Beginner' },
+      { id:'goconqr', name:'GOCONQR', category:'Study Tools & Flashcards', url:'https://www.goconqr.com/',
+        benefit:'Mind maps, flashcards, quizzes, and notes in one platform.',
+        steps:[ 'Sign up and choose a tool (Mind Map/Flashcards/Quiz).', 'Create or search public resources.', 'Organize into subjects/courses; share with peers.' ],
+        tips:[ 'Mind maps are great right before exams.', 'Use quiz mode to self‑test.' ],
+        notes:[ 'Some advanced features may be premium.' ], time:'3–6 min', skill:'Beginner' },
+      { id:'studystack', name:'StudyStack', category:'Study Tools & Flashcards', url:'https://www.studystack.com/',
+        benefit:'Flashcards with fun study games auto‑generated from your terms.',
+        steps:[ 'Search existing stacks or create your own.', 'Study cards, then try game modes (matching, hangman, etc.).', 'Share your stack link with classmates.' ],
+        tips:[ 'Great for vocabulary & facts‑heavy subjects.', 'Print option available for paper study.' ],
+        notes:[ 'Site design is simple but effective.' ], time:'2–4 min', skill:'Beginner' },
+      { id:'hippocampus', name:'Hippocampus', category:'Study Tools & Flashcards', url:'https://www.hippocampus.org/',
+        benefit:'Free academic videos and animations by subject (math, bio, econ, etc.).',
+        steps:[ 'Pick a subject on the homepage.', 'Open a topic to watch the animation/lecture segment.', 'Use the outline to jump quickly between subtopics.' ],
+        tips:[ 'Good for visual learners.', 'Pair with a textbook for exercises.' ],
+        notes:[ 'Some content mirrors NROC/Monterey resources.' ], time:'2–4 min', skill:'Beginner' },
+    
+
+
+
+  // === AI Tools ===
+  {
+    id: 'chatgpt',
+    name: 'ChatGPT',
+    category: 'AI Chatbot',
+    url: 'https://chat.openai.com/',
+    benefit: 'Natural language chatbot for Q&A, coding, learning, and content creation.',
+    steps: [
+      'Go to chat.openai.com and log in with Google, Microsoft, or OpenAI account.',
+      'Type your question or request (e.g., "Explain recursion with an example").',
+      'Ask follow-ups to refine the answer.',
+      'Use chat history for saved responses.',
+      'Copy/export answers for study or work.'
+    ],
+    tips: [
+      'Be specific with prompts for better output.',
+      'Use roles like "act as a teacher" for structured learning.'
+    ],
+    notes: [
+      'Free version limited; Pro has GPT-4.',
+      'Verify facts before using officially.'
+    ],
+    time: '1–3 min',
+    skill: 'Beginner'
+  },
+
+
+
+
+  {
+    id: 'claude',
+    name: 'Claude',
+    category: 'AI Chatbot',
+    url: 'https://claude.ai/',
+    benefit: 'AI assistant best for long text, documents, and reasoning tasks.',
+    steps: [
+      'Sign in at claude.ai.',
+      'Upload a document (PDF, TXT) or paste content.',
+      'Ask Claude to summarize, explain, or analyze.',
+      'Use Claude for writing or brainstorming.',
+      'Copy/download output.'
+    ],
+    tips: [
+      'Handles large documents (100k+ words).',
+      'Great for research and contracts.'
+    ],
+    notes: [
+      'Region-limited in some countries.',
+      'Mostly web-based.'
+    ],
+    time: '2–4 min',
+    skill: 'Beginner–Intermediate'
+  },
+
+
+
+
+  {
+    id: 'gemini',
+    name: 'Google Gemini',
+    category: 'AI Chatbot',
+    url: 'https://gemini.google.com/',
+    benefit: 'Google’s AI integrated with Search and Workspace tools.',
+    steps: [
+      'Log in with your Google account.',
+      'Ask queries or generate emails, documents, or code.',
+      'Use Gemini in Docs/Sheets/Gmail with “Help me write”.',
+      'Add images for multimodal queries.',
+      'Download/share results.'
+    ],
+    tips: [
+      'Great for updated info (via Google Search).',
+      'Use with Google apps for best workflow.'
+    ],
+    notes: [
+      'Available as mobile app replacing Google Assistant.'
+    ],
+    time: '2–4 min',
+    skill: 'Beginner'
+  },
+
+
+
+
+  {
+    id: 'midjourney',
+    name: 'Midjourney',
+    category: 'AI Image Generator',
+    url: 'https://www.midjourney.com/',
+    benefit: 'Creates realistic AI images and artwork from text prompts.',
+    steps: [
+      'Join the Midjourney Discord server.',
+      'Type `/imagine prompt: your description`.',
+      'Wait for 4 generated options.',
+      'Upscale or create variations.',
+      'Save the image from Discord.'
+    ],
+    tips: [
+      'Detailed prompts improve results.',
+      'Use aspect ratio (`--ar 16:9`) for control.'
+    ],
+    notes: [
+      'Paid subscription after trial.',
+      'Works inside Discord, not standalone.'
+    ],
+    time: '3–5 min',
+    skill: 'Beginner–Intermediate'
+  },
+
+
+
+
+  {
+    id: 'canva-magic-studio',
+    name: 'Canva Magic Studio',
+    category: 'AI Design',
+    url: 'https://www.canva.com/magic/',
+    benefit: 'AI-powered design assistant for posts, slides, and graphics.',
+    steps: [
+      'Log in to Canva and open Magic Studio.',
+      'Choose a design type (poster, reel, presentation).',
+      'Describe what you want.',
+      'Customize fonts, colors, and layout.',
+      'Download/share design.'
+    ],
+    tips: [
+      'Use Magic Resize for multiple formats.',
+      'Pair with Canva stock library.'
+    ],
+    notes: [
+      'Some features need Canva Pro.'
+    ],
+    time: '5–10 min',
+    skill: 'Beginner'
+  },
+
+
+
+
+  {
+    id: 'perplexity',
+    name: 'Perplexity AI',
+    category: 'AI Search Engine',
+    url: 'https://www.perplexity.ai/',
+    benefit: 'AI-powered search with sources, citations, and real-time web data.',
+    steps: [
+      'Visit perplexity.ai.',
+      'Ask a question or paste a link.',
+      'Browse summarized answers with citations.',
+      'Click sources to verify info.',
+      'Save/share results.'
+    ],
+    tips: [
+      'Good for quick research.',
+      'Use Pro for deeper web search.'
+    ],
+    notes: [
+      'Free with limited queries.',
+      'Works like AI + Google hybrid.'
+    ],
+    time: '2–3 min',
+    skill: 'Beginner'
+  },
+
+
+
+
+  {
+    id: 'elevenlabs',
+    name: 'ElevenLabs',
+    category: 'AI Voice Generator',
+    url: 'https://elevenlabs.io/',
+    benefit: 'Realistic AI voices for narration, audiobooks, and dubbing.',
+    steps: [
+      'Sign up on elevenlabs.io.',
+      'Type or paste text in the editor.',
+      'Choose a voice or upload sample for cloning.',
+      'Generate and preview audio.',
+      'Download MP3/WAV.'
+    ],
+    tips: [
+      'Adjust stability for natural tone.',
+      'Best for podcasts or YouTube.'
+    ],
+    notes: [
+      'Free tier limited to a few minutes.',
+      'Voice cloning requires paid plan.'
+    ],
+    time: '3–5 min',
+    skill: 'Beginner'
+  },
+
+
+
+
+  {
+    id: 'synthesia',
+    name: 'Synthesia',
+    category: 'AI Video Generator',
+    url: 'https://www.synthesia.io/',
+    benefit: 'Create AI avatar videos from text without camera/mic.',
+    steps: [
+      'Log in at synthesia.io.',
+      'Choose an AI avatar/template.',
+      'Type/paste your script.',
+      'Select voice and background.',
+      'Generate and download video.'
+    ],
+    tips: [
+      'Great for training and marketing.',
+      'Use custom avatars for branding.'
+    ],
+    notes: [
+      'Export limited in free trial.',
+      'Paid subscription for full HD.'
+    ],
+    time: '10–15 min',
+    skill: 'Beginner–Intermediate'
+  },
+
+
+
+
+  {
+    id: 'jasper',
+    name: 'Jasper AI',
+    category: 'AI Writing Assistant',
+    url: 'https://www.jasper.ai/',
+    benefit: 'Generates marketing copy, blogs, and social posts.',
+    steps: [
+      'Sign up on jasper.ai.',
+      'Choose a template (blog, ad, social).',
+      'Describe topic and tone.',
+      'Generate draft and edit.',
+      'Export or publish.'
+    ],
+    tips: [
+      'Best for SEO marketing content.',
+      'Integrates with Surfer SEO.'
+    ],
+    notes: [
+      'Paid subscription required.',
+      'Focuses on business content.'
+    ],
+    time: '5–10 min',
+    skill: 'Beginner'
+  },
+
+
+
+  {
+    id: 'grammarly',
+    name: 'Grammarly',
+    category: 'AI Writing',
+    url: 'https://www.grammarly.com/',
+    benefit: 'Checks grammar, spelling, and style with AI suggestions.',
+    steps: [
+      'Install Grammarly extension/app.',
+      'Type text in docs, email, or editor.',
+      'Review underlined errors.',
+      'Apply style and tone suggestions.',
+      'Download final text.'
+    ],
+    tips: [
+      'Enable plagiarism checker for essays.',
+      'Use tone detector for formal/informal writing.'
+    ],
+    notes: [
+      'Premium needed for advanced checks.',
+      'Works in Word, Docs, Gmail, etc.'
+    ],
+    time: '2–3 min',
+    skill: 'Beginner'
+  },
+
+
+
+  {
+    id: 'notion-ai',
+    name: 'Notion AI',
+    category: 'AI Productivity',
+    url: 'https://www.notion.so/product/ai',
+    benefit: 'Built-in AI for summarizing, writing, and organizing in Notion.',
+    steps: [
+      'Open a Notion page.',
+      'Type “/ai” to trigger Notion AI.',
+      'Ask for summaries, brainstorming, or rewriting.',
+      'Insert results into workspace.',
+      'Edit and customize output.'
+    ],
+    tips: [
+      'Use for meeting notes and task lists.',
+      'Combine with Notion databases.'
+    ],
+    notes: [
+      'Not free; part of Notion Plus/Business.',
+      'Only works inside Notion.'
+    ],
+    time: '2–4 min',
+    skill: 'Beginner'
+  },
+
+
+
+
+
+  {
+    id: 'quillbot',
+    name: 'Quillbot',
+    category: 'AI Paraphrasing',
+    url: 'https://quillbot.com/',
+    benefit: 'Paraphrasing tool for essays, assignments, and research.',
+    steps: [
+      'Go to quillbot.com.',
+      'Paste or type text.',
+      'Select paraphrasing mode (standard, fluency, creative).',
+      'Check synonyms and grammar fixes.',
+      'Copy/download final result.'
+    ],
+    tips: [
+      'Use citation generator for essays.',
+      'Pair with Grammarly for accuracy.'
+    ],
+    notes: [
+      'Free version limited in characters.',
+      'Premium unlocks all modes.'
+    ],
+    time: '1–3 min',
+    skill: 'Beginner'
+  },
+
+
+
+
+  {
+    id: 'runwayml',
+    name: 'Runway ML',
+    category: 'AI Video Editing',
+    url: 'https://runwayml.com/',
+    benefit: 'AI-powered video editor with text-to-video, green screen, and generative tools.',
+    steps: [
+      'Sign up on runwayml.com.',
+      'Upload video or start with AI generation.',
+      'Use tools like background removal, text-to-video.',
+      'Edit timeline and preview.',
+      'Export final video.'
+    ],
+    tips: [
+      'Try Gen-2 model for text-to-video.',
+      'Good for filmmakers and content creators.'
+    ],
+    notes: [
+      'Free credits available.',
+      'Heavy rendering needs GPU time.'
+    ],
+    time: '10–20 min',
+    skill: 'Intermediate'
+  },
+
+
+
+
+  {
+    id: 'descript',
+    name: 'Descript',
+    category: 'AI Audio/Video Editing',
+    url: 'https://www.descript.com/',
+    benefit: 'Edit videos and podcasts by editing text transcripts.',
+    steps: [
+      'Download Descript app.',
+      'Upload audio/video file.',
+      'AI generates transcript.',
+      'Edit transcript to cut audio/video.',
+      'Export finished media.'
+    ],
+    tips: [
+      'Use “Overdub” to clone your voice.',
+      'Good for podcast creators.'
+    ],
+    notes: [
+      'Free plan limited in transcription minutes.'
+    ],
+    time: '10–15 min',
+    skill: 'Intermediate'
+  },
+
+
+
+
+
+  {
+    id: 'copyai',
+    name: 'Copy.ai',
+    category: 'AI Marketing Copy',
+    url: 'https://www.copy.ai/',
+    benefit: 'AI writing tool for ads, sales copy, and emails.',
+    steps: [
+      'Sign up on copy.ai.',
+      'Choose copy type (ad, email, blog).',
+      'Enter product/service details.',
+      'Generate drafts and refine.',
+      'Download/share text.'
+    ],
+    tips: [
+      'Great for quick LinkedIn or ad copy.',
+      'Experiment with tone settings.'
+    ],
+    notes: [
+      'Free trial available.',
+      'Focuses mainly on marketing content.'
+    ],
+    time: '3–6 min',
+    skill: 'Beginner'
+  },
+
+
+
+
+  // === Educational Resources ===
+  {
+    id: 'google-books',
+    name: 'Google Books',
+    category: 'Educational Resources',
+    url: 'https://books.google.com/',
+    benefit: 'Search inside millions of books and previews online.',
+    steps: [
+      'Go to books.google.com.',
+      'Search by title, author, or ISBN.',
+      'Preview available chapters/pages.',
+      'Click links to buy/borrow full version.',
+      'Save to your Google Library.'
+    ],
+    tips: [
+      'Use advanced search filters.',
+      'Some books available fully free (public domain).'
+    ],
+    notes: [
+      'Most copyrighted books are only partially viewable.'
+    ],
+    time: '2–3 min',
+    skill: 'Beginner'
+  },
+
+
+
+
+  {
+    id: 'ndli',
+    name: 'National Digital Library of India (NDLI)',
+    category: 'Educational Resources',
+    url: 'https://ndl.iitkgp.ac.in/',
+    benefit: 'One-stop digital library of academic resources across India.',
+    steps: [
+      'Sign up with email or institute ID.',
+      'Search textbooks, research papers, or courses.',
+      'Filter by subject, level, or format.',
+      'Open and read online PDFs/videos.',
+      'Save resources to your library.'
+    ],
+    tips: [
+      'Supports multiple Indian languages.',
+      'Good for competitive exam prep.'
+    ],
+    notes: [
+      'Some content needs institutional access.'
+    ],
+    time: '3–6 min',
+    skill: 'Beginner–Intermediate'
+  },
+
+
+
+
+  {
+    id: 'oapen',
+    name: 'OAPEN Library',
+    category: 'Educational Resources',
+    url: 'https://www.oapen.org/',
+    benefit: 'Open access scholarly books in humanities and social sciences.',
+    steps: [
+      'Go to oapen.org/library.',
+      'Search or browse subjects.',
+      'Open a book page.',
+      'Download full PDF (if available).',
+      'Save citation.'
+    ],
+    tips: [
+      'Best for academic research and references.'
+    ],
+    notes: [
+      'Focus mainly on HSS fields.'
+    ],
+    time: '3–5 min',
+    skill: 'Intermediate'
+  },
+
+
+
+  {
+    id: 'doab',
+    name: 'Directory of Open Access Books (DOAB)',
+    category: 'Educational Resources',
+    url: 'https://www.doabooks.org/',
+    benefit: 'Catalog of academic open access books across all fields.',
+    steps: [
+      'Go to doabooks.org.',
+      'Search by keyword/subject.',
+      'Filter by publisher/language.',
+      'Open and download PDF/EPUB.',
+      'Check license details.'
+    ],
+    tips: [
+      'Good for verified peer-reviewed books.'
+    ],
+    notes: [
+      'Content depends on publishers.'
+    ],
+    time: '3–5 min',
+    skill: 'Intermediate'
+  },
+
+
+
+  {
+    id: 'pdf-drive',
+    name: 'PDF Drive',
+    category: 'Educational Resources',
+    url: 'https://www.pdfdrive.com/',
+    benefit: 'Free ebook search engine with downloadable PDFs.',
+    steps: [
+      'Search a book by title/author.',
+      'Click download or preview.',
+      'Wait for file processing.',
+      'Save PDF to device.',
+      'Open in a PDF reader.'
+    ],
+    tips: [
+      'Use exact title for best results.'
+    ],
+    notes: [
+      'Unofficial source; verify copyright.'
+    ],
+    time: '2–3 min',
+    skill: 'Beginner'
+  },
+
+
+
+
+  {
+    id: 'z-library',
+    name: 'Z-Library',
+    category: 'Educational Resources',
+    url: 'https://z-library.sk/',
+    benefit: 'Largest online free ebook repository across subjects.',
+    steps: [
+      'Sign up/login at Z-Library site.',
+      'Search for books or articles.',
+      'Click download (PDF/EPUB/MOBI).',
+      'Save to device.',
+      'Read in preferred app.'
+    ],
+    tips: [
+      'Try mirror links if main site is down.'
+    ],
+    notes: [
+      'Unofficial—copyright issues may exist.'
+    ],
+    time: '2–4 min',
+    skill: 'Beginner'
+  },
+
+
+
+  {
+    id: 'librivox',
+    name: 'LibriVox',
+    category: 'Educational Resources',
+    url: 'https://librivox.org/',
+    benefit: 'Free public domain audiobooks read by volunteers.',
+    steps: [
+      'Visit librivox.org.',
+      'Browse by author, title, or genre.',
+      'Select a book page.',
+      'Stream chapters or download MP3/ZIP.',
+      'Listen on mobile/PC.'
+    ],
+    tips: [
+      'Great for classics and literature lovers.',
+      'Download whole book as ZIP for offline.'
+    ],
+    notes: [
+      'Only public domain works available.'
+    ],
+    time: '2–3 min',
+    skill: 'Beginner'
+  },
+];
+
+
+const cardsRoot = document.getElementById('cards');
+const template = document.getElementById('cardTemplate');
+const search = document.getElementById('search');
+const category = document.getElementById('category');
+const sortSelect = document.getElementById('sort');
+
+function render(){
+  const q = (search.value || '').toLowerCase().trim();
+  const cat = category.value;
+  const sort = sortSelect.value;
+  let list = platforms.slice();
+
+  // Filter by category
+  if(cat !== 'all') {
+    list = list.filter(p => p.category === cat);
+  }
+
+  // Filter by search query in name, benefit, steps, tips
+  if(q) {
+    list = list.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      (p.benefit && p.benefit.toLowerCase().includes(q)) ||
+      (p.steps && p.steps.some(st => st.toLowerCase().includes(q))) ||
+      (p.tips && p.tips.some(tp => tp.toLowerCase().includes(q)))
+    );
+  }
+
+  // Sorting
+  if(sort === 'az') {
+    list.sort((a,b) => a.name.localeCompare(b.name));
+  } else if(sort === 'cat') {
+    list.sort((a,b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name));
+  }
+
+  // Clear existing cards
+  cardsRoot.innerHTML = '';
+
+  // Render cards
+  list.forEach(p => {
+    const node = template.content.cloneNode(true);
+    const article = node.querySelector('article');
+    article.id = p.id;
+    article.dataset.id = p.id;
+
+    // Basic fields
+    node.querySelector('.platform-title').textContent = p.name;
+    node.querySelector('.category').textContent = p.category;
+    const visitBtn = node.querySelector('.visitBtn');
+    visitBtn.href = p.url;
+    node.querySelector('.benefit').textContent = p.benefit;
+    node.querySelector('.time').textContent = p.time || '';
+    node.querySelector('.skill').textContent = p.skill || '';
+
+    // steps
+    const stepsEl = node.querySelector('.steps');
+    stepsEl.innerHTML = '';
+    if(p.steps){
+      p.steps.forEach(s => { 
+        const li = document.createElement('li'); 
+        li.textContent = s; 
+        stepsEl.appendChild(li); 
+      });
+    }
+
+    // tips
+    const tipsEl = node.querySelector('.tips');
+    tipsEl.innerHTML = '';
+    if(p.tips){
+      p.tips.forEach(t => { 
+        const li = document.createElement('li'); 
+        li.textContent = t; 
+        tipsEl.appendChild(li); 
+      });
+    }
+
+    // notes
+    const notesEl = node.querySelector('.notes');
+    notesEl.innerHTML = '';
+    if(p.notes){
+      p.notes.forEach(n => {
+        const li = document.createElement('li');
+        li.textContent = n;
+        notesEl.appendChild(li);
+      });
+    }
+
+    // ✅ FIXED: Copy button copies its own Visit button link
+    const shareBtn = node.querySelector('.shareBtn');
+    shareBtn.addEventListener('click', () => {
+      const visitLink = visitBtn.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(visitLink).then(() => {
+          alert('link copied!');
+        }).catch(() => {
+          fallbackCopy(visitLink);
+        });
+      } else {
+        fallbackCopy(visitLink);
+      }
+    });
+
+    cardsRoot.appendChild(node);
+  });
+}
+
+// fallback copy for old browsers
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.setAttribute('readonly', '');
+  ta.style.position = 'absolute';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    alert('Visit link copied!');
+  } catch (err) {
+    prompt('Copy this link:', text);
+  }
+  document.body.removeChild(ta);
+}
+
+// Auto scroll and highlight based on URL param or hash
+function focusById(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.scrollIntoView({behavior:'smooth', block:'start'});
+  el.classList.add('ring-2','ring-purple-500');
+  setTimeout(() => el.classList.remove('ring-2','ring-purple-500'), 4000);
+}
+
+function readInitialAnchor(){
+  const url = new URL(location.href);
+  const viaParam = url.searchParams.get('tool');
+  const viaHash = location.hash ? location.hash.replace('#','') : '';
+  const id = viaParam || viaHash;
+  if(id){
+    // After content rendered, scroll to id
+    setTimeout(() => focusById(id), 500);
+  }
+}
+
+// Event listeners for inputs
+search.addEventListener('input', render);
+category.addEventListener('change', render);
+sortSelect.addEventListener('change', render);
+
+// Initial render and scroll after fully loaded
+render();
+readInitialAnchor();
+
+// 🎨 Background Toggle
+const toggleBtn = document.getElementById("toggleBtn");
+toggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("bg1");
+  document.body.classList.toggle("bg2");
+});
+
+  </script>
+</body>
+</html>

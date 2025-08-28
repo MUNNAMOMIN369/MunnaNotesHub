@@ -1,0 +1,242 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me | MunnaNotesHub</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Backgrounds (🎨 toggle) ===== */
+    body.bg1 {
+      background: linear-gradient(to right, #0f172a, #1e293b);
+    }
+    body.bg2 {
+      background: linear-gradient(to right, #0f766e, #2563eb);
+    }
+
+    /* ===== Glass Effect ===== */
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    /* ===== Nav Hover + Underline ===== */
+    nav a {
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffcc70;
+      transform: translateY(-3px);
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: right;
+    }
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* ===== Fonts / Base Colors ===== */
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+    }
+
+    /* ===== Toggle Button ===== */
+    #toggleBtn {
+      background: linear-gradient(135deg, #ff512f, #dd2476);
+      transition: all 0.3s ease;
+    }
+    #toggleBtn:hover {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      transform: scale(1.05);
+    }
+
+    /* ===== Cards Hover Lift ===== */
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body class="bg1">
+
+  <!-- ===== Header ===== -->
+  <header class="glass fixed w-full top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <!-- Logo -->
+      <h1 class="text-2xl font-bold flex items-center gap-2 text-indigo-300">
+        📘 MunnaNotesHub
+      </h1>
+
+      <!-- Nav -->
+      <nav class="hidden md:flex gap-6 text-lg">
+        <a href="index.html">Home</a>
+        <a href="notes.html">Notes</a>
+        <a href="videos.html">Videos</a>
+        <a href="tools.html">Tools</a>
+	
+        <a href="contact.html">Contact</a>
+        <a href="about.html" class="font-semibold">About</a>
+      </nav>
+
+      <!-- Background Toggle -->
+      <button id="toggleBtn" class="px-3 py-1 rounded-lg text-white">🎨</button>
+    </div>
+  </header>
+
+  <!-- ===== About Section ===== -->
+  <main class="pt-28">
+    <section class="container mx-auto px-4 py-12">
+      <div class="glass card shadow-lg rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8">
+        <!-- Photo -->
+        <div class="w-40 h-40 rounded-full overflow-hidden shadow-md">
+          <img src="https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755901022/sameer_iclrzc.jpg" alt="Sameer (Munna)" class="w-full h-full object-cover" />
+
+        </div>
+        <!-- Description -->
+        <div>
+          <h2 class="text-3xl font-bold mb-4 text-indigo-300">About Me</h2>
+          <p class="mb-3">Hello! My name is <strong>Sameer Momin</strong>, but most people know me as <strong>Munna</strong>.  
+          I am a passionate Computer Science and Engineering student at <strong>New Horizon College of Engineering, Bengaluru</strong>.</p>
+
+          <p class="mb-3">💻 I have skills in C, C++, Java, Python, Web Development, and Machine Learning, and I enjoy learning new technologies.</p>
+          <p class="mb-3">🚀 I am currently working on projects like <em>Online Payment Fraud Detection using Machine Learning</em> and <em>Student Attendance Management System using Android Studio</em>.</p>
+          <p class="mb-3">📚 I also love sharing knowledge with others through notes, coding help, and tech resources.</p>
+          <p>Apart from academics, I am a dedicated learner, always curious about AI, Cloud, and Cybersecurity.  
+          My goal is to become a successful professional who builds innovative solutions and helps others grow. 🌟</p>
+        </div>
+      </div>
+    </section>
+
+  <!-- ===== About NotesHub with Photo & Legal Reference ===== -->
+<section class="container mx-auto px-4 pb-12">
+  <div class="glass card shadow-lg rounded-2xl p-8 flex flex-col items-center gap-8">
+    
+    <!-- Heading -->
+    <h2 class="text-3xl font-bold mb-4 text-indigo-300 text-center">About NotesHub</h2>
+    
+    <!-- Description Content Center -->
+    <div class="text-center max-w-2xl text-gray-200">
+      <p class="mb-4">
+        📘 <strong>NotesHub</strong> is your one-stop platform for learning and sharing knowledge.
+        It helps students and developers access <strong>study notes, coding resources, AI tools, learning videos, and project guidance</strong> — all in one place.
+      </p>
+      <p class="mb-4">
+        🚀 Built with modern web technologies, NotesHub is designed to make studying smarter, faster, and more collaborative.
+        From managing your notes 📑 to exploring new tools 🛠️, it’s the hub for every learner.
+      </p>
+      <p class="mb-6">
+        🌟 Mission: To empower learners with quality resources, foster collaboration, and make knowledge accessible for everyone.
+      </p>
+    </div>
+
+    <!-- Photo + Legal Reference Row -->
+    <div class="flex flex-col md:flex-row items-start md:items-stretch gap-8 w-full">
+      
+      <!-- Left: Photo -->
+      <div class="w-full md:w-1/2 rounded-2xl overflow-hidden shadow-md flex justify-center">
+        <img src="https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755900904/WhatsApp_Image_2025-08-23_at_03.44.39_a8b27258_xtps4p.jpg" 
+             alt="Sameer (Munna)" 
+             class="w-full h-full object-cover rounded-2xl" />
+      </div>
+      
+      <!-- Right: Sources & Legal Reference -->
+      <div class="w-full md:w-1/2">
+        <div class="glass p-6 rounded-xl shadow-inner border border-indigo-600 h-full">
+          <h3 class="text-2xl font-semibold mb-3 text-indigo-300">📌 Sources & Legal Reference</h3>
+          <p class="mb-3">
+            All the study books and resources shared on <strong>MunnaNotesHub</strong> are taken from 
+            <span class="text-yellow-300">legal and free platforms</span>.  
+            We do not host pirated or illegal content.
+          </p>
+          <p class="mb-3 font-semibold">✅ Official Free Platforms we use:</p>
+          <ul class="list-disc list-inside mb-4 space-y-1 text-gray-200 text-sm">
+            <li><a href="https://www.gutenberg.org/" class="text-blue-400 underline" target="_blank" rel="noopener">Project Gutenberg</a></li>
+            <li><a href="https://archive.org/" class="text-blue-400 underline" target="_blank" rel="noopener">Internet Archive</a></li>
+            <li><a href="https://openlibrary.org/" class="text-blue-400 underline" target="_blank" rel="noopener">Open Library</a></li>
+            <li><a href="https://ndl.iitkgp.ac.in/" class="text-blue-400 underline" target="_blank" rel="noopener">NDLI (National Digital Library of India)</a></li>
+            <li><a href="https://openstax.org/" class="text-blue-400 underline" target="_blank" rel="noopener">OpenStax</a></li>
+            <li><a href="https://library.oapen.org/" class="text-blue-400 underline" target="_blank" rel="noopener">OAPEN</a></li>
+            <li><a href="https://www.doabooks.org/" class="text-blue-400 underline" target="_blank" rel="noopener">DOAB</a></li>
+            <li><a href="https://bookboon.com/" class="text-blue-400 underline" target="_blank" rel="noopener">BookBoon</a></li>
+            <li><a href="https://saylor.org/" class="text-blue-400 underline" target="_blank" rel="noopener">Saylor Academy</a></li>
+            <li><a href="https://ocw.mit.edu/" class="text-blue-400 underline" target="_blank" rel="noopener">MIT OCW</a></li>
+          </ul>
+          <p class="text-gray-300 text-sm leading-relaxed">
+            ℹ️ These resources are freely available under <strong>public domain</strong> or 
+            <strong>open educational licenses</strong>.  
+            If you are a copyright holder and believe any material should be removed, please 
+            <a href="contact.html" class="text-blue-400 underline" target="_blank" rel="noopener">contact us</a> before taking any action.  
+            We respect intellectual property rights and are ready to resolve issues peacefully. 🙏
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- ===== Study Purpose Note ===== -->
+    <section class="container mx-auto px-4 pb-12">
+      <div class="glass shadow-lg rounded-2xl p-6 flex items-center gap-4 card">
+        <!-- Small Photo -->
+        <div class="w-20 h-20 rounded-full overflow-hidden shadow-md flex-shrink-0">
+          <img src="https://res.cloudinary.com/dvgxrnhtd/image/upload/v1755901022/sameer_iclrzc.jpg" alt="Sameer (Munna)" class="w-full h-full object-cover" />
+        </div>
+        <!-- Note Text -->
+        <div>
+          <h3 class="text-xl font-semibold text-indigo-300 mb-2">📌 Study Purpose</h3>
+          <p class="text-gray-200">
+            Ye website <strong>sirf study purpose ke liye</strong> banayi gayi hai.  
+            Iska use academic learning, coding help, notes aur resources ke liye kiya jata hai.  
+            Kripya iska misuse na karein. 🙏
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/919606365902" target="_blank"
+     class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.85 11.85 0 0012 0C5.37 0 0 5.37 0 12c0 2.12.55 4.19 1.6 6.01L0 24l6.19-1.62A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 21.82c-1.85 0-3.65-.5-5.23-1.44l-.38-.23-3.68.97.98-3.58-.25-.37A9.82 9.82 0 012.18 12c0-5.41 4.41-9.82 9.82-9.82 2.63 0 5.1 1.02 6.95 2.87a9.78 9.78 0 012.87 6.95c0 5.41-4.41 9.82-9.82 9.82zm5.36-7.38c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.15-.64.14-.19.29-.74.93-.9 1.12-.16.19-.33.22-.62.07-.29-.15-1.24-.46-2.36-1.48-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.55-.88-2.12-.23-.56-.47-.49-.64-.5h-.55c-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43s1.03 2.82 1.18 3.01c.15.19 2.03 3.09 4.93 4.33.69.3 1.23.48 1.65.62.69.22 1.32.19 1.82.12.56-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34z"/>
+    </svg>
+  </a>
+
+  <script>
+    // 🎨 Background Toggle
+    const toggleBtn = document.getElementById("toggleBtn");
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("bg1");
+      document.body.classList.toggle("bg2");
+    });
+  </script>
+</body>
+</html>

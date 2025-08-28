@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MunnaNotesHub - Videos</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+/* ===== Backgrounds (🎨 toggle) ===== */
+body.bg1 {
+  background: linear-gradient(to right, #0f172a, #1e293b);
+}
+body.bg2 {
+  background: linear-gradient(to right, #0f766e, #2563eb);
+}
+/* ===== Glass Effect ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ===== Cards Hover Lift ===== */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+}
+
+/* ===== Nav Hover + Underline ===== */
+nav a {
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+nav a:hover {
+  color: #ffcc70;
+  transform: translateY(-3px);
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: right;
+}
+nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ===== Fonts / Base Colors ===== */
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  color: #f1f5f9;
+}
+
+/* ===== Toggle Button ===== */
+#toggleBtn {
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+  transition: all 0.3s ease;
+}
+#toggleBtn:hover {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  transform: scale(1.05);
+}
+
+/* ===== WhatsApp Floating ===== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+.whatsapp-float:hover {
+  background-color: #20b857;
+  transform: scale(1.1);
+}
+
+/* ===== Responsive Video Aspect ===== */
+.aspect-video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  overflow: hidden;
+  border-radius: 0.75rem; /* rounded-lg */
+}
+.aspect-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+  </style>
+</head>
+<body class="bg1">
+
+  <!-- ===== Header ===== -->
+  <header class="glass fixed w-full top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <!-- Logo -->
+      <h1 class="text-2xl font-bold flex items-center gap-2 text-indigo-300">
+        📘 MunnaNotesHub
+      </h1>
+
+      <!-- Nav -->
+      <nav class="hidden md:flex gap-6 text-lg">
+        <a href="index.html">Home</a>
+        <a href="notes.html">Notes</a>
+        <a href="videos.html">Videos</a>
+        <a href="tools.html">Tools</a>
+	
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <!-- Background Toggle -->
+      <button id="toggleBtn" class="px-3 py-1 rounded-lg text-white">🎨</button>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="pt-28">
+    <section class="container mx-auto p-6" id="videosSection">
+      <h2 class="text-3xl font-bold text-center mb-8 text-indigo-300">🎥 AI & Machine Learning Videos</h2>
+      <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3" id="videosGrid"></div>
+    </section>
+  </main>
+
+  <!-- ===== WhatsApp Floating Button ===== -->
+  <a href="https://wa.me/919606365902" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.85 11.85 0 0012 0C5.37 0 0 5.37 0 12c0 2.12.55 4.19 1.6 6.01L0 24l6.19-1.62A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 21.82c-1.85 0-3.65-.5-5.23-1.44l-.38-.23-3.68.97.98-3.58-.25-.37A9.82 9.82 0 012.18 12c0-5.41 4.41-9.82 9.82-9.82 2.63 0 5.1 1.02 6.95 2.87a9.78 9.78 0 012.87 6.95c0 5.41-4.41 9.82-9.82 9.82zm5.36-7.38c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.15-.64.14-.19.29-.74.93-.9 1.12-.16.19-.33.22-.62.07-.29-.15-1.24-.46-2.36-1.48-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.55-.88-2.12-.23-.56-.47-.49-.64-.5h-.55c-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43s1.03 2.82 1.18 3.01c.15.19 2.03 3.09 4.93 4.33.69.3 1.23.48 1.65.62.69.22 1.32.19 1.82.12.56-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34z"/>
+    </svg>
+  </a>
+
+  <!-- ===== Scripts ===== -->
+  <script>
+    // 🎨 Background Toggle
+    const toggleBtn = document.getElementById("toggleBtn");
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("bg1");
+      document.body.classList.toggle("bg2");
+    });
+
+    // ===== Manual Videos =====
+    const manualVideos = [
+  { title: "Intro to AI", url: "https://www.youtube.com/embed/2ePf9rue1Ao" },
+  { title: "Machine Learning Basics", url: "https://www.youtube.com/embed/GwIo3gDZCVQ" },
+  { title: "Deep Learning Explained", url: "https://www.youtube.com/embed/ajeTYqhRHno?si=79nuG8AINjV5fHat" },
+  { title: "Neural Networks", url: "https://www.youtube.com/embed/ILsA4nyG7I0" },
+  { title: "Natural Language Processing", url: "https://www.youtube.com/embed/fOvTtapxa9c" },
+  { title: "AI in Real World", url: "https://www.youtube.com/embed/FiMpvYntyxA" },
+  { title: "ML with Python", url: "https://www.youtube.com/embed/ie4oGI85SAE" },
+  { title: "Computer Vision", url: "https://www.youtube.com/embed/puB-4LuRNys?si=pcW0WIUxrNzKawdx" },
+  { title: "AI Future", url: "https://www.youtube.com/embed/KKNCiRWd_j0" },
+  { title: "Generative AI", url: "https://www.youtube.com/embed/lv7ka-8FscI?si=YR-Fs94LqQFG3U1c" },
+  { title: "Tally", url: "https://www.youtube.com/embed/zNVYlWzG6wY" },
+
+ 
+  // --- Engineering ---
+  { title: "Engineering Mathematics", url: "https://www.youtube.com/embed/b-UZJVdLbXc" },
+
+  { title: "Thermodynamics", url: "https://www.youtube.com/embed/q5CZUnsWkYQ" },
+
+  { title: "Fluid Mechanics", url: "https://www.youtube.com/embed/KJKKYjJyBDc"  },
+
+  { title: "Strength of Materials", url: "https://www.youtube.com/embed/La4UEa7hA7Q" },
+
+  { title: "Electrical Machines", url: "https://www.youtube.com/embed/PmBqB-4hgW4 " },
+
+  { title: "Digital Electronics", url: "https://www.youtube.com/embed/M0mx8S05v60" },
+
+  { title: "Data Structures", url: "https://www.youtube.com/embed/xLetJpcjHS0  " },
+
+
+  { title: "Operating Systems", url: "https://www.youtube.com/embed/vBURTt97EkA" },
+
+
+  { title: "Database Management System", url: "https://www.youtube.com/embed/OMwgGL3lHlI?si=gE_D4pPWN9FJIR7K" },
+
+
+  { title: "Computer Networks", url: "https://www.youtube.com/embed/VwN91x5i25g" },
+
+  // --- Medical ---
+  { title: "Human Anatomy",
+ url: "https://www.youtube.com/embed/Ae4MadKPJC0" },
+
+
+  { title: "Physiology Basics", url: "https://www.youtube.com/embed/uBGl2BujkPQ" },
+
+
+  { title: "Biochemistry for MBBS", url: "https://www.youtube.com/embed/P0Mm_54ratI" },
+
+
+  { title: "Pathology Introduction", url: "https://www.youtube.com/embed/u-s4oOwh4kQ" },
+
+
+  { title: "Pharmacology Essentials", url: "https://www.youtube.com/embed/D6mj-xHOCcc" },
+
+
+  { title: "Microbiology Overview", url: "https://www.youtube.com/embed/cnuMpd7Et5Y" },
+
+
+  { title: "Community Medicine", url: "https://www.youtube.com/embed/JywsWktvODc" },
+
+
+  { title: "Forensic Medicine", url: "https://www.youtube.com/embed/hxsraRUM2TM" },
+
+
+  { title: "Clinical Examination Skills", url: "https://www.youtube.com/embed/BKOcqlZnCIM" },
+
+
+  { title: "Surgery Basics", url: "https://www.youtube.com/embed/rhy-ELMfZfA" },
+
+  { title: "Data Science Projects", url: "https://www.youtube.com/embed/Qz7erR3zVUc" }
+];
+
+
+
+    // Create one video card
+    function createVideoCard(video) {
+      const card = document.createElement("div");
+      card.className = "glass p-6 rounded-xl card";
+      card.innerHTML = `
+        <h3 class="font-bold text-xl mb-4 text-indigo-300 text-center">${video.title}</h3>
+        <div class="aspect-video">
+          <iframe 
+            src="${video.url}"
+            title="${video.title}"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+        </div>
+      `;
+      return card;
+    }
+
+    // Load manual videos
+    function loadManualVideos() {
+      const grid = document.getElementById("videosGrid");
+      manualVideos.forEach(video => grid.appendChild(createVideoCard(video)));
+    }
+
+    // Fetch and load API videos (optional)
+    function loadApiVideos() {
+      fetch("http://localhost:5000/videos")
+        .then(res => res.json())
+        .then(data => {
+          if (!data || !Array.isArray(data) || data.length === 0) return;
+          const grid = document.getElementById("videosGrid");
+          data.forEach(v => {
+            // Expecting { title, videoUrl }
+            const item = { title: v.title, url: v.videoUrl };
+            grid.appendChild(createVideoCard(item));
+          });
+        })
+        .catch(err => console.error("Failed to fetch videos:", err));
+    }
+
+    // Init
+    loadManualVideos();
+    loadApiVideos();
+  </script>
+</body>
+</html>
